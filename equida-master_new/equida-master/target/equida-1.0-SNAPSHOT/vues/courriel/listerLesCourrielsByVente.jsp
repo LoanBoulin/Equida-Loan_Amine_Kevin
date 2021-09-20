@@ -26,7 +26,6 @@
                     <th>Objet</th>
                     <th>Corps</th>
                     <th></th>
-                    <th></th>
                     
             <br>
             <br>
@@ -58,10 +57,7 @@
                         out.println("<td><a href ='../ServletPieceJointe/listerLesPiecesJointesByCourriel?couId="+ unCourriel.getId()+ "'>");
                         out.println("Voir les pièces jointes");
                         out.println("</td>");
-                        
-                        out.println("<td><a href ='../ServletClient/listerLesClientsParCategVente?codeCat="+ unCourriel.getId()+ "'>");
-                        out.println("(pas fait) Voir les clients abonnés");
-                        out.println("</td>");
+                       
                                
                     }
                     %>
