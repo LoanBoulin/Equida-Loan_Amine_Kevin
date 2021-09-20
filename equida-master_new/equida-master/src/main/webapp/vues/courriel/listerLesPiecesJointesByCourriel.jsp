@@ -7,14 +7,19 @@
 <%@page import="model.PieceJointe"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Equida</title>
-    </head>
-    <body>
-       <h1>LISTE DES Pieces jointes</h1>
+<%@include file="../components/header.jsp" %>
+
+
+       <!-- ======= Team Section ======= -->
+<section id="team" class="team section-bg">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>LISTE DES PIECES JOINTES </h2>
+      <p>Voici la liste des pièces jointes relatifs à ce message</p>
+    </div>
+
+    <div class="row">
          <%
         ArrayList<PieceJointe> lesPiecesJointes = (ArrayList)request.getAttribute("pLesPiecesJointes");
         %>
@@ -55,5 +60,8 @@
                 </tr>
             </tbody>
         </table>
-    </body>
-</html>
+   </div>
+  </div>
+</section>
+
+<%@include file="../components/footer.jsp" %>

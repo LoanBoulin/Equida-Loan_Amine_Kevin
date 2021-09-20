@@ -7,14 +7,21 @@
 <%@page import="model.Courriel"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Equida</title>
-    </head>
-    <body>
-       <h1>LISTE DES COURRIELS POUR UNE VENTE</h1>
+
+
+<%@include file="../components/header.jsp" %>
+
+
+       <!-- ======= Team Section ======= -->
+<section id="team" class="team section-bg">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>LISTE DES MESSAGES </h2>
+      <p>Voici la liste des messages relatifs à cette catégorie de vente</p>
+    </div>
+
+    <div class="row">
          <%
         ArrayList<Courriel> lesCourriels = (ArrayList)request.getAttribute("pLesCourriels");
         %>
@@ -64,5 +71,8 @@
                 </tr>
             </tbody>
         </table>
-    </body>
-</html>
+    </div>
+  </div>
+</section>
+
+<%@include file="../components/footer.jsp" %>

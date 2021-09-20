@@ -7,33 +7,42 @@
 <%@page import="model.Client"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Equida</title>
-    </head>
-    <body>
-       <h1>LISTE DES CLIENTS POUR UNE CATEGORIE DE VENTE</h1>
+
+<%@include file="../components/header.jsp" %>
+
+ 
          <%
         ArrayList<Client> lesClients = (ArrayList)request.getAttribute("pLesClients");
         %>
-        <table  class="table table-bordered table-striped table-condensed">  
-            <thead>
-                <tr>             
-                    <th>Id</th>
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Pays</th>
-                    <th>Rue</th>
-                    <th>Code Postal</th>
-                    <th>Ville</th>
-                    <th>Adresse Messagerie</th>
-            <br>
-            <br>
-                </tr>
-            </thead>
-            <tbody>
+        
+        <!-- ======= Team Section ======= -->
+<section id="team" class="team section-bg">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>LISTE DES CLIENTS INTERESSES </h2>
+      <p>Voici la liste des clients intéressés par la vente</p>
+    </div>
+
+    <div class="row">
+      
+      <table  class="table table-bordered table-striped table-condensed">  
+        <thead>
+            <tr>             
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Pays</th>
+                <th>Rue</th>
+                <th>Code Postal</th>
+                <th>Ville</th>
+                <th>Adresse Messagerie</th>
+        <br>
+        <br>
+            </tr>
+        </thead>
+        <tbody>
+        
                 <tr>
                     <%
                     for(int i = 0; i < lesClients.size();i++)
@@ -76,5 +85,9 @@
                 </tr>
             </tbody>
         </table>
-    </body>
-</html>
+       
+    </div>
+  </div>
+</section>
+
+<%@include file="../components/footer.jsp" %>

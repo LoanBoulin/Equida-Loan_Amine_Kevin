@@ -47,6 +47,7 @@ public class ClientDAO {
                 unClient.setNom(rs.getString("cli_nom"));
                 unClient.setPrenom(rs.getString("cli_prenom"));
                 unClient.setVille(rs.getString("cli_ville"));
+                unClient.setAdrRue(rs.getString("cli_rue"));
                 unClient.setCodePostal(rs.getString("cli_copos"));
                 unClient.setAdresseMessagerie(rs.getString("cli_adresseMessagerie"));
                 
