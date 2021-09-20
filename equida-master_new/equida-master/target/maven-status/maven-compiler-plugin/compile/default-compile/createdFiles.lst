@@ -1,0 +1,13 @@
+model\Client.class
+Database\Utilitaire.class
+model\CategVente.class
+Database\InitConnexion.class
+Database\VenteDAO.class
+Database\PaysDAO.class
+Database\CategVenteDAO.class
+Database\ClientDAO.class
+forms\FormClient.class
+model\Vente.class
+servlet\ServletClient.class
+model\Pays.class
+servlet\ServletVente.class
