@@ -47,6 +47,9 @@
                         out.println("<a href ='../ServletCourriel/listerLesCourrielsByVente?venId="+ uneVente.getId()+ "'>");
                         out.println("Lister les messages");
                         out.println("</a>");
+                        out.println("<a href ='../ServletLot/listerLesLotsByVente?venId="+ uneVente.getId()+ "'>");
+                        out.println("Voir les chevaux");
+                        out.println("</a>");
                         
                         out.println("</div></div>");
                        
