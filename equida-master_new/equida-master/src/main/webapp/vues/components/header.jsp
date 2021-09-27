@@ -48,8 +48,8 @@
   <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@example.com</a>
-        <i class="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55
+        <i class="bi bi-envelope-fill"></i><a href="mailto:contact@equida.com">contact@equida.com</a>
+        <i class="bi bi-phone-fill phone-icon"></i> 06 06 07 07 09
       </div>
       <div class="social-links d-none d-md-block">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -70,7 +70,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="../accueil.html">Accueil</a></li>
+          <li><a class="nav-link scrollto active" href="../index.html">Accueil</a></li>
           <li><a class="nav-link scrollto" href="../ServletVente/listerLesVentes">Ventes</a></li>
           <li><a class="nav-link scrollto" href="../chevaux.html">Chevaux</a></li>
           <li><a class="nav-link scrollto " href="../profil.html">Profil</a></li>

@@ -79,6 +79,41 @@
                 <li><strong>Date de naissance : </strong><% out.println(leCheval.getDateNaissance()); %></li>
               </ul>
             </div>
+            <div class="portfolio-info">
+              <h3>Parents</h3>
+              <ul>
+                <li><strong>Père : </strong>
+                   
+                    <% 
+
+                        if(leCheval.getLePere().getNom() != null){
+                            out.println("<a href ='../ServletCheval/detailCheval?Cheval="+ leCheval.getLePere().getId()+ "'>");
+                            out.println(leCheval.getLePere().getNom());
+                            out.println("</a>");
+                        }else{
+                            out.println("Père inconnu");
+                        }
+                         
+
+                    
+                    
+                    %>
+                    </li>
+                <li><strong>Mère : </strong> <% 
+                    
+                        if(leCheval.getLaMere().getNom() != null){
+                            out.println("<a href ='../ServletCheval/detailCheval?Cheval="+ leCheval.getLePere().getId()+ "'>");
+                            out.println(leCheval.getLaMere().getNom());
+                            out.println("</a>");
+                        }else{
+                            out.println("Mère inconnue");
+                        }
+
+                
+                
+              %> </li>
+              </ul>
+            </div>
             <div class="portfolio-description">
               <h2>This is an example of portfolio detail</h2>
               <p>
@@ -86,6 +121,14 @@
               </p>
             </div>
           </div>
+              
+              
+              
+             
+              
+              
+              
+              
 
         </div>
 

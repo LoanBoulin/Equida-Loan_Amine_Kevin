@@ -21,6 +21,8 @@ public class Cheval {
     private String nomImage ;
     private ArrayList<Lot> lesLots ;
     private TypeCheval leType ;
+    private Cheval lePere;
+    private Cheval laMere;
 
     public Cheval() {
         
@@ -104,6 +106,23 @@ public class Cheval {
     public void setNomImage(String nomImage) {
         this.nomImage = nomImage;
     }
+
+    public Cheval getLePere() {
+        return lePere;
+    }
+
+    public void setLePere(Cheval lePere) {
+        this.lePere = lePere;
+    }
+
+    public Cheval getLaMere() {
+        return laMere;
+    }
+
+    public void setLaMere(Cheval laMere) {
+        this.laMere = laMere;
+    }
+    
     
     
     
