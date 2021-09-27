@@ -23,6 +23,10 @@
         <servlet-name>ServletLot</servlet-name>
         <servlet-class>servlet.ServletLot</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCheval</servlet-name>
+        <servlet-class>servlet.ServletCheval</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/listerLesClientsParCategVente</url-pattern>
@@ -46,6 +50,10 @@
     <servlet-mapping>
         <servlet-name>ServletLot</servlet-name>
         <url-pattern>/ServletLot/listerLesLotsByVente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCheval</servlet-name>
+        <url-pattern>/ServletCheval/detailCheval</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

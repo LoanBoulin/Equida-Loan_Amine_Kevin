@@ -18,6 +18,7 @@ public class Cheval {
     private String sexe ;
     private String sire ; 
     private String dateNaissance ;
+    private String nomImage ;
     private ArrayList<Lot> lesLots ;
     private TypeCheval leType ;
 
@@ -25,7 +26,7 @@ public class Cheval {
         
     }
 
-    public Cheval(int id, String nom, String sexe, String sire, String dateNaissance) {
+    public Cheval(int id, String nom, String sexe, String sire, String dateNaissance, String nomImage) {
         this.id = id;
         this.nom = nom;
         this.sexe = sexe;
@@ -95,6 +96,14 @@ public class Cheval {
         }
         lesLots.add(pUnLot);
     }   
+
+    public String getNomImage() {
+        return nomImage;
+    }
+
+    public void setNomImage(String nomImage) {
+        this.nomImage = nomImage;
+    }
     
     
     

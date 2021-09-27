@@ -1,0 +1,60 @@
+NON CONNECTE
+- Accueil
+- Enchère (seulement consultation)
+	- Page de vente (seulement consultation)
+- Chevaux (seulement consultation)
+	- Page de cheval (seulement consultation)
+- Page de connexion
+	- Page d'inscription
+
+Client
+- Accueil
+	- Mes ventes
+	- Mes achats
+	- Mes offres
+- Page d'enchère
+	- Page de vente
+	- Soumettre un cheval a la vente
+- Chevaux 
+	- Page de cheval
+- Profil
+	- déconnexion
+
+
+
+
+Salarié
+- Accueil
+- Enchères
+	- Page de vente
+	- ajout de vente
+	- Modification / suppression d'une vente
+- Courses
+	- Gerer Courses
+- Clients et courriels
+	- Gérer courriels
+- Chevaux 
+	- validation ou non cheval a soumettre
+	- Page de cheval
+- Profil
+	- Déconnexion
+
+
+
+Admin : 
+- Accueil
+- Enchères
+	- Page de vente
+	- ajout de vente
+	- Modification / suppression d'une vente
+	- Modification catégories
+- Courses
+	- Gerer Courses
+- Clients et courriels
+	- Gérer courriels
+- Chevaux 
+	- validation ou non cheval a soumettre
+	- Page de cheval
+	- Modification catégories
+- Profil
+	- Déconnexion
