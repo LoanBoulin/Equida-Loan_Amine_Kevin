@@ -11,7 +11,7 @@
 <%@include file="../components/header.jsp" %>
 
  
-         <%
+        <%
         ArrayList<Client> lesClients = (ArrayList)request.getAttribute("pLesClients");
         %>
         

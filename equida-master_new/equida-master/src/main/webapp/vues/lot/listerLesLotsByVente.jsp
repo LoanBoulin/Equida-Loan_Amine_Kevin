@@ -75,7 +75,13 @@
                         out.println("<div class='col-lg-4 col-md-6 portfolio-item filter-"
                                 + leTypeDuCheval
                                 + "'>");
-                            out.println("<div class='portfolio-wrap'>");
+                        
+                        out.println("<a href ='../ServletCheval/detailCheval?Cheval="+ unLot.getLeCheval().getId()+ "'>");
+                        
+                        
+                            out.println("<div class='portfolio-wrap'> ");
+                            
+                                    
                             
 
                             if(unLot.getLeCheval().getNomImage() == null){
@@ -85,7 +91,7 @@
                                         + unLot.getLeCheval().getNomImage()
                                         + "' class='img-fluid' alt=''>");
                             }
-                                    out.println("<a href ='../ServletCheval/detailCheval?Cheval="+ unLot.getLeCheval().getId()+ "'>");
+                                    
                                     
                                     out.println("<div class='portfolio-info'>");
                                         out.println("<h4>");
@@ -96,10 +102,11 @@
                                         out.println(unLot.getPrix());
                             out.println("€</h5>");
                             
-                            out.println("</a>");
                             
                             
-                            out.println("<div class='portfolio-links'></div></div></div></div>");
+                            
+                            out.println("<div class='portfolio-links'></div></div></div></a></div>");
+                            
                             //out.println("<div class='portfolio-links'><a href='assets/img/portfolio/portfolio-1.jpg' data-gallery='portfolioGallery' class='portfolio-lightbox' title='Roberto'><i class='bx bx-plus'></i></a><a href='portfolio-details.html' title='More Details'><i class='bx bx-link'></i></a></div></div></div></div>");
                     }
             

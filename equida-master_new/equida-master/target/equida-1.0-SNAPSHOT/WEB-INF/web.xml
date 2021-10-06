@@ -3,6 +3,9 @@
     <listener>
         <listener-class>Database.InitConnexion</listener-class>
     </listener>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>ServletClient</servlet-name>
         <servlet-class>servlet.ServletClient</servlet-class>
@@ -26,6 +29,14 @@
     <servlet>
         <servlet-name>ServletCheval</servlet-name>
         <servlet-class>servlet.ServletCheval</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAccueil</servlet-name>
+        <servlet-class>servlet.ServletAccueil</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletCompte</servlet-name>
+        <servlet-class>servlet.ServletCompte</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
@@ -54,6 +65,22 @@
     <servlet-mapping>
         <servlet-name>ServletCheval</servlet-name>
         <url-pattern>/ServletCheval/detailCheval</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAccueil</servlet-name>
+        <url-pattern>/ServletAccueil/accueil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCompte</servlet-name>
+        <url-pattern>/ServletCompte/connexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCompte</servlet-name>
+        <url-pattern>/ServletCompte/ajouterCompteClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCompte</servlet-name>
+        <url-pattern>/ServletCompte/ajouterComptePro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
