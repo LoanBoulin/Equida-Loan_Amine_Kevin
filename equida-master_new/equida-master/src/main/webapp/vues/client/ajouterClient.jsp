@@ -113,19 +113,7 @@
                 
                 
                 
-                <%-- Cases à cocher permettant de choisir les différentes catégories de vente auxquelles le client souhaite s'inscrire 
-                <label for="categVente">Categories de vente : </label></br>
-                 <%
-                        ArrayList<CategVente> lesCategVente = (ArrayList)request.getAttribute("pLesCategVente");
-                        for (int i=0; i<lesCategVente.size();i++){
-                            CategVente cv = lesCategVente.get(i);
-                            out.println("<input type='checkbox' id='cb" + i + "' name='" + cv.getCode() + "'>"); 
-                            out.println(cv.getLibelle()); 
-                            out.println("</label></br>");
-                        }
-                    %>
-                    </br>
-                    --%>
+             
                                 
             <input type="submit" name="valider" id="valider" value="Valider"/>
             </form>
