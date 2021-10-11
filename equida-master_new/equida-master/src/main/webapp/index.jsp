@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    //session.setAttribute("login", false);
+    session.setAttribute("login", false);
     
     String redirectURL = "http://localhost:8080/equida/ServletAccueil/accueil";
     response.sendRedirect(redirectURL);

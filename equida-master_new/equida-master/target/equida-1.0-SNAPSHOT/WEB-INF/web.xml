@@ -71,6 +71,10 @@
         <url-pattern>/ServletCheval/detailCheval</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletCheval</servlet-name>
+        <url-pattern>/ServletCheval/ajouterCheval</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
         <url-pattern>/ServletAccueil/accueil</url-pattern>
     </servlet-mapping>
