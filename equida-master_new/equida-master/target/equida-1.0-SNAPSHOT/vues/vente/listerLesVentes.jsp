@@ -27,7 +27,10 @@
 
         <div class="row no-gutters">
             
-             <%
+             <% 
+        Compte leCompteAcc=(Compte)session.getAttribute("compte");
+       
+
                 for(int i = 0; i < lesVentes.size();i++)
                 {
                     
@@ -40,13 +43,23 @@
                             out.println(uneVente.getNom());
                         out.println("</h4>");
                         
-                        out.println("<a href ='../ServletClient/listerLesClientsParCategVente?codeCat="+ uneVente.getCategVente().getCode()+ "'>");
-                        out.println("Voir les clients intéressés");
-                        out.println("</a>");
-                        out.println("<br/><br/>");
-                        out.println("<a href ='../ServletCourriel/listerLesCourrielsByVente?venId="+ uneVente.getId()+ "'>");
-                        out.println("Lister les messages");
-                        out.println("</a>");
+                        if(session.getAttribute("login").equals(true)){
+                            if(leCompteAcc.getLeRole() != null){
+                                if(leCompteAcc.getLeRole().getNom().equals("Salarie") || leCompteAcc.getLeRole().getNom().equals("Admin")){
+
+                                    out.println("<a href ='../ServletClient/listerLesClientsParCategVente?codeCat="+ uneVente.getCategVente().getCode()+ "'>");
+                                    out.println("Voir les clients intéressés");
+                                    out.println("</a>");
+                                    out.println("<br/><br/>");
+                                    out.println("<a href ='../ServletCourriel/listerLesCourrielsByVente?venId="+ uneVente.getId()+ "'>");
+                                    out.println("Lister les messages");
+                                    out.println("</a>");
+
+                                }
+                            }
+                        }
+                        
+                       
                         out.println("<a href ='../ServletLot/listerLesLotsByVente?venId="+ uneVente.getId()+ "'>");
                         out.println("Voir les chevaux");
                         out.println("</a>");

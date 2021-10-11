@@ -88,8 +88,7 @@ public class ServletCheval extends HttpServlet {
             String venId = (String)request.getParameter("Cheval");
             
             //Récupération du Cheval
-            Cheval leCheval = ChevalDAO.getChevalById(connection, Integer.parseInt(venId));  
-                
+            Cheval leCheval = ChevalDAO.getChevalById(connection, Integer.parseInt(venId));
             //Mise en paramètres de l'objet cheval
             request.setAttribute("pLeCheval", leCheval);
             

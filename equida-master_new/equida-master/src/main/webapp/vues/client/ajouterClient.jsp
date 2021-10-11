@@ -4,14 +4,14 @@
     Author     : Zakina
 --%>
 
+<%@page import="model.Role"%>
 <%@page import="model.CategVente"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Pays"%>
 <%@page import="forms.FormClient"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@include file="../components/header.jsp" %>
-
-
 <section id="contact" class="contact">
       <div class="container">
           
@@ -31,6 +31,8 @@
         
         <form class="form-inline" action="ajouterClient" method="POST" style="margin : 0 auto; max-width: 700px;">
             
+            <h4>Informations principales</h4>
+            
             <div class="row">
                 
                 <div class="form-group col-md-6">
@@ -49,22 +51,28 @@
             
             <div class="row">
                 <div class="form-group col-md-6">
-                <label for="titre">TITRE : </label>
-                <input id="titre"  type="text"  name="titre"  class="form-control" size="30" maxlength="30">      
-                </br>
+                <label for="titre">Civilité : </label>
+                <select name="titre">
+                    <option value="M"> Monsieur </option>
+                    <option value="F"> Madame </option>
+                    <option value="A"> Autre </option>
+                </select>
+                </br>      
                 </div>
                  
                 <div class="form-group col-md-6">
-                <label for="adrMessagerie">ADRESSE MAIL : </label>
-                <input id="adrMessagerie"  type="text"  name="adrMessagerie"  class="form-control" size="30" maxlength="30">      
+                <label for="mail">ADRESSE MAIL : </label>
+                <input id="mail"  type="text"  name="mail"  class="form-control" size="30" maxlength="30">      
                 </br>
                 </div>
             </div>    
+            
+            <h4>Contact</h4>
                  
             <div class="row">
                 <div class="form-group col-md-6">
-                <label for="adrRue">RUE : </label>
-                <input id="adrRue"  type="text"  name="adrRue"  class="form-control" size="30" maxlength="30">
+                <label for="rue">RUE : </label>
+                <input id="rue"  type="text"  name="rue"  class="form-control" size="30" maxlength="30">
                 </br>
                 </div>
                                
@@ -99,7 +107,46 @@
                 </br> 
                 </div>
              </div>
-                <label for="categVente">CATEGORIE DE VENTE : </label>
+                
+                
+                
+                <h4>Compte</h4>
+                 
+            <div class="row">
+                <div class="form-group col-md-6">
+                <label for="username">Username : </label>
+                <input id="username"  type="text"  name="username"  class="form-control" size="30" maxlength="30">
+                </br>
+                </div>
+                               
+                 
+                <div class="form-group col-md-6">
+                <label for="password">Password : </label>
+                <input id="password"  type="text"  name="password"  class="form-control" size="30" maxlength="30">
+                </br>
+                </div>
+            </div> 
+                
+                <div class="form-group col-md-6">
+                <label for="role">Role : </label>
+                <select name="role">
+                    <%
+                        ArrayList<Role> lesRoles = (ArrayList)request.getAttribute("pLesRoles");
+                        for (int i=0; i<lesRoles.size();i++){
+                            Role unRole = lesRoles.get(i);
+                            out.println("<option value ='" + unRole.getCode() + "'>" + unRole.getNom() + "</option>"); 
+                           
+                        }
+                    %>
+                </select>
+                </br>   
+                </br> 
+                </br> 
+                </div>
+            
+                
+                
+                <%--  <label for="categVente">CATEGORIE DE VENTE : </label>
                 <select name="categVente"  class="form-control" size="5" multiple>
                 <%
                         ArrayList<CategVente> lesCategVente = (ArrayList)request.getAttribute("pLesCategVente");
@@ -109,15 +156,12 @@
                            
                         }
                     %>
-                </select></br>
+                </select></br>--%>
                 
                 
-                
-             
+                    
                                 
             <input type="submit" name="valider" id="valider" value="Valider"/>
             </form>
           </div>  </div>
                 </section>
-
-
