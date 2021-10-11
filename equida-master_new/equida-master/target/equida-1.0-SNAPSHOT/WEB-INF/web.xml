@@ -47,6 +47,10 @@
         <url-pattern>/ServletVente/listerLesVentes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletVente</servlet-name>
+        <url-pattern>/ServletVente/venteDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/ajouterClient</url-pattern>
     </servlet-mapping>
@@ -67,10 +71,6 @@
         <url-pattern>/ServletCheval/detailCheval</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletCheval</servlet-name>
-        <url-pattern>/ServletCheval/ajouterCheval</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
         <url-pattern>/ServletAccueil/accueil</url-pattern>
     </servlet-mapping>
@@ -85,6 +85,10 @@
     <servlet-mapping>
         <servlet-name>ServletCompte</servlet-name>
         <url-pattern>/ServletCompte/ajouterComptePro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCompte</servlet-name>
+        <url-pattern>/ServletCompte/deconnexion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

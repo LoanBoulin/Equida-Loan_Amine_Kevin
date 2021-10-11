@@ -89,6 +89,8 @@
                 }
                 out.println(") ");
                 out.println("</a></li>");
+                //Deconnexion
+                out.println("<li><a class='nav-link' href='../ServletCompte/deconnexion'>Deconnexion</a></li>");
               }else{
                 out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
               }

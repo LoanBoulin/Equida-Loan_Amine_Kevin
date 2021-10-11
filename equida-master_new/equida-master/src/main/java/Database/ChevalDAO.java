@@ -5,21 +5,15 @@
  */
 package Database;
 
-import static Database.ClientDAO.requete;
-import static Database.ClientDAO.rs;
 import static Database.LotDAO.requete;
 import static Database.LotDAO.rs;
-import static Database.PaysDAO.requete;
-import static Database.PaysDAO.rs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Cheval;
-import model.Client;
 import model.Lot;
-import model.Pays;
 import model.TypeCheval;
 
 /**
@@ -134,86 +128,6 @@ public class ChevalDAO {
         return leCheval ;    
     } 
     
+   
     
-     public static Cheval ajouterCheval(Connection connection , Cheval unCheval){
-        
-        int idGenere = -1;
-        try 
-        {
-            
-            requete = connection.prepareStatement("INSERT INTO CHEVAL(CHE_NOM,CHE_SEXE,CHE_SIRE,CHE_DATENAISSANCE,CHE_NOMIMAGE,CHE_IDPERE,CHE_IDMERE, TYP_ID)\n"+
-                    "VALUES (?,?,?,?,?,?,?,?)" , requete.RETURN_GENERATED_KEYS);
-            requete.setString(1,unCheval.getNom());
-            requete.setString(2,unCheval.getSexe());
-            requete.setString(3,unCheval.getSire());
-            requete.setString(4,unCheval.getDateNaissance());
-            requete.setString(5,unCheval.getNomImage());
-            requete.setInt(6,unCheval.getLePere().getId());
-            requete.setInt(7,unCheval.getLaMere().getId());
-            requete.setInt(8,unCheval.getLeType().getId());
-          
-            
-         
-            
-            
-            requete.executeUpdate();
-            
-            rs=requete.getGeneratedKeys();
-            while(rs.next() ){
-                idGenere=rs.getInt(1);
-                unCheval.setId(idGenere);
-            }
-        }
-    
-        catch (SQLException e )
-                {
-                e.printStackTrace();
-                }
-            
-                return unCheval;
-                
-     
-        }
-        
-     
-          public static ArrayList<Cheval>  getLesChevaux (Connection connection){      
-        ArrayList<Cheval> lesChevaux = new  ArrayList<Cheval>();
-        try
-        {
-            
-          //preparation de la requete     
-            requete=connection.prepareStatement("select * from cheval");
-            
-            //executer la requete
-            rs=requete.executeQuery();
-            
-             while ( rs.next() ) {  
-                Cheval unCheval = new Cheval();
-                TypeCheval unType = new TypeCheval();
-                
-                unCheval.setId(rs.getInt("che_id"));
-                unCheval.setNom(rs.getString("che_nom"));
-                unCheval.setSexe(rs.getString("che_sexe"));
-                unCheval.setDateNaissance(rs.getString("che_datenaissance"));
-                unCheval.setNomImage(rs.getString("che_nomimage"));
-                
-                unType.setId(rs.getInt("typ_id"));
-                
-                unCheval.setLeType(unType);
-                
-                lesChevaux.add(unCheval);
-             
-            //On hydrate l'objet métier Client avec les résultats de la requête
-                 }
-        }   
-        catch (SQLException e) 
-        {
-            e.printStackTrace();
-            //out.println("Erreur lors de l’établissement de la connexion");
-        }
-        return lesChevaux ;    
-    } 
 }
-
-
-

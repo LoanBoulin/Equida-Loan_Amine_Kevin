@@ -5,13 +5,8 @@
  */
 package servlet;
 
-import Database.CategVenteDAO;
 import Database.ChevalDAO;
-import Database.ClientDAO;
-import Database.PaysDAO;
 import Database.TypeChevalDAO;
-import forms.FormCheval;
-import forms.FormClient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -21,10 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.CategVente;
 import model.Cheval;
-import model.Client;
-import model.Pays;
 import model.TypeCheval;
 
 /**
@@ -94,19 +86,7 @@ public class ServletCheval extends HttpServlet {
             
             getServletContext().getRequestDispatcher("/vues/cheval/detailCheval.jsp").forward(request, response);
       
-        } else  if(url.equals("/equida/ServletCheval/ajouterCheval")){
-        
-            ArrayList<TypeCheval> lesTypes = TypeChevalDAO.getTypesCheval(connection);
-            ArrayList<Cheval> lesChevaux = ChevalDAO.getLesChevaux(connection);
-            request.setAttribute("pLesChevaux", lesChevaux); 
-            request.setAttribute("pLesTypes", lesTypes); 
-            
-        
-            this.getServletContext().getRequestDispatcher("/vues/cheval/ajouterCheval.jsp" ).forward( request, response );
-       
-        
         }
-       
     }
 
     /**
@@ -117,41 +97,10 @@ public class ServletCheval extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            /* Préparation de l'objet formulaire */
-        FormCheval form = new FormCheval();
-		
-        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
-        Cheval unCheval = form.ajouterUnCheval(request);
-        
-        /* Stockage du formulaire et de l'objet dans l'objet request */
-        request.setAttribute( "form", form );
-        request.setAttribute( "pCheval", unCheval );
-		
-        if (form.getErreurs().isEmpty()){
-            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos 
-            Cheval chevalInsere =  ChevalDAO.ajouterCheval(connection, unCheval);
-            if (chevalInsere != null ){
-                                           
-                    String redirectURL = "../ServletCheval/detailCheval?Cheval=" + chevalInsere.getId();
-                    response.sendRedirect(redirectURL);
-            }
-            else 
-            {
-                // Cas oùl'insertion en bdd a échoué
-                //renvoyer vers une page d'erreur 
-            }
-        }
-        else
-        { 
-		// il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
-            ArrayList<Cheval> lesChevaux = ChevalDAO.getLesChevaux(connection);
-            request.setAttribute("pLesChevaux", lesChevaux);
-            
-           
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -165,4 +114,3 @@ public class ServletCheval extends HttpServlet {
     }// </editor-fold>
 
 }
-

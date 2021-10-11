@@ -18,7 +18,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Nos chevaux</h2>
+          <h2>Les chevaux de la vente </h2>
           <p>Nous proposons les meilleurs chevaux, adaptés à vos besoins, et triés par types.</p>
         </div>
 

@@ -124,7 +124,17 @@ public class ServletCompte extends HttpServlet {
             //ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
             //request.setAttribute("pLesCategVente", lesCategVentes);
             this.getServletContext().getRequestDispatcher("/vues/compte/ajouterComptePro.jsp" ).forward( request, response );
+        }else
+        
+        if(url.equals("/equida/ServletCompte/deconnexion"))
+        {                   
+            
+            HttpSession session = request.getSession(true);
+            session.setAttribute("login", false);   
+            String redirectURL = "http://localhost:8080/equida/ServletCompte/connexion";
+            response.sendRedirect(redirectURL);
         }
+        
         
         
     }

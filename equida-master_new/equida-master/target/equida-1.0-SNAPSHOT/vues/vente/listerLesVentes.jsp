@@ -42,26 +42,10 @@
                         out.println("</p><h4 class='enchereDiv'>");
                             out.println(uneVente.getNom());
                         out.println("</h4>");
-                        
-                        if(session.getAttribute("login").equals(true)){
-                            if(leCompteAcc.getLeRole() != null){
-                                if(leCompteAcc.getLeRole().getNom().equals("Salarie") || leCompteAcc.getLeRole().getNom().equals("Admin")){
-
-                                    out.println("<a href ='../ServletClient/listerLesClientsParCategVente?codeCat="+ uneVente.getCategVente().getCode()+ "'>");
-                                    out.println("Voir les clients intéressés");
-                                    out.println("</a>");
-                                    out.println("<br/><br/>");
-                                    out.println("<a href ='../ServletCourriel/listerLesCourrielsByVente?venId="+ uneVente.getId()+ "'>");
-                                    out.println("Lister les messages");
-                                    out.println("</a>");
-
-                                }
-                            }
-                        }
-                        
-                       
-                        out.println("<a href ='../ServletLot/listerLesLotsByVente?venId="+ uneVente.getId()+ "'>");
-                        out.println("Voir les chevaux");
+                                              
+                        //out.println("<a href ='../ServletLot/listerLesLotsByVente?venId="+ uneVente.getId()+ "'>");
+                        out.println("<a href ='../ServletVente/venteDetail?venId="+ uneVente.getId() + "'>");
+                        out.println("Voir plus");
                         out.println("</a>");
                         
                         out.println("</div></div>");
