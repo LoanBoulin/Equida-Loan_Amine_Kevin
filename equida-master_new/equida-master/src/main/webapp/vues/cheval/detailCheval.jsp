@@ -87,7 +87,7 @@
                     <% 
 
                         if(leCheval.getLePere().getNom() != null){
-                            out.println("<a href ='../ServletCheval/detailCheval?Cheval="+ leCheval.getLePere().getId()+ "'>");
+                            out.println("<a href ='?Cheval="+ leCheval.getLePere().getId()+ "'>");
                             out.println(leCheval.getLePere().getNom());
                             out.println("</a>");
                         }else{
@@ -102,7 +102,7 @@
                 <li><strong>Mère : </strong> <% 
                     
                         if(leCheval.getLaMere().getNom() != null){
-                            out.println("<a href ='../ServletCheval/detailCheval?Cheval="+ leCheval.getLePere().getId()+ "'>");
+                            out.println("<a href ='?Cheval="+ leCheval.getLaMere().getId()+ "'>");
                             out.println(leCheval.getLaMere().getNom());
                             out.println("</a>");
                         }else{

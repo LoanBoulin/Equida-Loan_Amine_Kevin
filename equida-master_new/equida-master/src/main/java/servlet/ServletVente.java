@@ -79,6 +79,16 @@ public class ServletVente extends HttpServlet {
             request.setAttribute("pLesVentes", lesVentes);
             getServletContext().getRequestDispatcher("/vues/vente/listerLesVentes.jsp").forward(request, response);
       
+        }else
+            
+        if(url.equals("/equida/ServletVente/venteDetail"))
+        {  
+            String venId = (String)request.getParameter("venId");
+            Vente laVente = VenteDAO.getlaVente(venId, connection);
+            
+            request.setAttribute("vente", laVente);
+            getServletContext().getRequestDispatcher("/vues/vente/venteDetail.jsp").forward(request, response);
+      
         }
         
     }
