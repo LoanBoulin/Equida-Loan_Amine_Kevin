@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Cheval;
 import model.Client;
 import model.Pays;
 
@@ -82,16 +83,14 @@ public class ClientDAO {
             // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requete=connection.prepareStatement("INSERT INTO CLIENT ( cli_nom, cli_prenom, cli_titre, cli_rue, cli_copos, cli_ville, cli_adressemessagerie, code)\n" +
-                    "VALUES (?,?,?,?,?,?,?,?)", requete.RETURN_GENERATED_KEYS );
+            requete=connection.prepareStatement("INSERT INTO CLIENT ( nom, prenom, codePays)\n" +
+                    "VALUES (?,?,?)", requete.RETURN_GENERATED_KEYS );
             requete.setString(1, unClient.getNom());
             requete.setString(2, unClient.getPrenom());
-            requete.setString(3, unClient.getTitre());
-            requete.setString(4, unClient.getAdrRue());      
-            requete.setString(5, unClient.getCodePostal());
-            requete.setString(6, unClient.getVille());
-            requete.setString(7, unClient.getAdresseMessagerie());
-            requete.setString(8, unClient.getLePays().getCode());
+            requete.setString(3, unClient.getLePays().getCode());
+            requete.setString(4, unClient.getCodePostal());
+            requete.setString(5, unClient.getVille());
+            requete.setString(6, unClient.getAdresseMessagerie());
             
 
            /* Exécution de la requête */
@@ -104,20 +103,13 @@ public class ClientDAO {
                 unClient.setId(idGenere);
             }
             
-            // ajout du client dans la table acheteur
-            PreparedStatement requete2=connection.prepareStatement("INSERT INTO acheteur (CLI_ID)\n" +
-                    "VALUES (?)");
-            requete2.setInt(1, unClient.getId());
-            requete2.executeUpdate();
-
-            
             // ajout des enregistrement dans la table clientcategvente
             for (int i=0;i<unClient.getLesCategVente().size();i++){
-                PreparedStatement requete3=connection.prepareStatement("INSERT INTO ach_cat (CLI_ID, CAT_CODE )\n" +
+                PreparedStatement requete2=connection.prepareStatement("INSERT INTO clientcategvente (codeClient, codeCategVente )\n" +
                     "VALUES (?,?)");
-                 requete3.setInt(1, unClient.getId());
-                 requete3.setString(2, unClient.getLesCategVente().get(i).getCode());
-                 requete3.executeUpdate();
+                 requete2.setInt(1, unClient.getId());
+                 requete2.setString(2, unClient.getLesCategVente().get(i).getCode());
+                 requete2.executeUpdate();
             }
             
         }   
@@ -129,7 +121,11 @@ public class ClientDAO {
         return unClient ;    
     }
     
+   
+        }
+        
+        
     
     
     
-}
+

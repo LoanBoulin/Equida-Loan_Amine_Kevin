@@ -117,5 +117,5 @@ public class Client {
         }
         lesCategVente.add(CategVente);
     }
-
+    
 } 

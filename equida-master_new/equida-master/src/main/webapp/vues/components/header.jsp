@@ -4,7 +4,6 @@
     Author     : loanb
 --%>
 
-<%@page import="model.Compte"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,34 +66,14 @@
 
       <!--<h1 class="logo me-auto"><a href="index.html">Green</a></h1>-->
       <!-- Uncomment below if you prefer to use an image logo -->
-      <a href="/equida" class="logo me-auto"><img src="../assets/img/logo.png" alt="" class="img-fluid"></a>
+      <a href="../index.html" class="logo me-auto"><img src="../assets/img/logo.png" alt="" class="img-fluid"></a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="/equida">Accueil</a></li>
+          <li><a class="nav-link scrollto active" href="../index.html">Accueil</a></li>
           <li><a class="nav-link scrollto" href="../ServletVente/listerLesVentes">Ventes</a></li>
-          
-          <%
-              Object laVar = session.getAttribute("login");
-                                       
-              if(laVar.equals(true)){
-                out.println("<li><a class='nav-link scrollto ' href='../profil.html'>");
-                Compte leCompte=(Compte)session.getAttribute("compte");
-                out.println(leCompte.getLogin());
-                out.println(" (");
-                if(leCompte.getLeClient() == null){
-                   out.println(leCompte.getLeRole().getNom());
-                }else if(leCompte.getLeRole() == null){
-                   out.println("Client"); 
-                }
-                out.println(") ");
-                out.println("</a></li>");
-                //Deconnexion
-                out.println("<li><a class='nav-link' href='../ServletCompte/deconnexion'>Deconnexion</a></li>");
-              }else{
-                out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
-              }
-          %>
+          <li><a class="nav-link scrollto" href="../chevaux.html">Chevaux</a></li>
+          <li><a class="nav-link scrollto " href="../profil.html">Profil</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

@@ -8,7 +8,6 @@ package servlet;
 import Database.CategVenteDAO;
 import Database.ClientDAO;
 import Database.PaysDAO;
-import Database.RoleDAO;
 import forms.FormClient;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.CategVente;
 import model.Client;
 import model.Pays;
-import model.Role;
 
 /**
  *
@@ -98,12 +96,10 @@ public class ServletClient extends HttpServlet {
          if(url.equals("/equida/ServletClient/ajouterClient"))
         {                   
             ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
-            ArrayList<Role> lesRoles = RoleDAO.getLesRoles(connection);
             request.setAttribute("pLesPays", lesPays);
-            request.setAttribute("pLesRoles", lesRoles);
             
-            //ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-            //request.setAttribute("pLesCategVente", lesCategVentes);
+            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+            request.setAttribute("pLesCategVente", lesCategVentes);
             this.getServletContext().getRequestDispatcher("/vues/client/ajouterClient.jsp" ).forward( request, response );
         }
         
@@ -144,7 +140,7 @@ public class ServletClient extends HttpServlet {
         }
         else
         { 
-            // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+		// il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
             ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
             request.setAttribute("pLesPays", lesPays);
             

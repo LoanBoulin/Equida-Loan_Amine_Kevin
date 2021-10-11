@@ -64,11 +64,9 @@ public class FormClient {
          
         String nom = getDataForm( request, "nom" );
         String prenom = getDataForm( request, "prenom");
-        String titre = getDataForm( request, "titre" );
         String rue = getDataForm( request, "rue" );
         String copos = getDataForm( request, "copos");
         String ville = getDataForm( request, "ville" );
-        String mail = getDataForm( request, "mail" );
         String pays = getDataForm( request, "codePays" );
        
         // Traitement de la liste à choix multiple
@@ -96,13 +94,11 @@ public class FormClient {
             resultat = "Échec de l'ajout.";
         }
          
-       
+      
         unClient.setPrenom(prenom);
-        unClient.setTitre(titre);
-        unClient.setAdrRue(rue);
-        unClient.setCodePostal(copos);
-        unClient.setVille(ville);
-        unClient.setAdresseMessagerie(mail);
+        //unClient.setRue(rue);
+        //unClient.setCopos(copos);
+        //unClient.setVille(ville);
         unClient.setLePays(new Pays(pays));
         
         return unClient ;
