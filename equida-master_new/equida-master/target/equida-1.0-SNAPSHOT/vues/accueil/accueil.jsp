@@ -8,6 +8,41 @@
 
 <%@include file="../components/header.jsp" %>
 
+
+<!-- ======= Modal for insertion ======= -->
+
+
+
+<% 
+    
+    if(request.getAttribute("pLeCompte") != null ){ 
+    
+        String InsertStatus = (String)request.getAttribute("pLeCompte");
+        if(InsertStatus.equals("1")){ 
+            
+            out.println("<br > <div class='container'>"
+                    + "<div class='alert alert-success alert-dismissible fade show' role='alert' style='margin=20px'>"
+                    + "<p>Le compte a bien été inséré</p>"
+                    + "</div></div>");
+  
+        }else{
+            
+            out.println("<br > <div class='container'>"
+                    + "<div class='alert alert-danger alert-dismissible fade show' role='alert' style='margin=20px'>"
+                    + "<p>Erreur dans l'insertion, veuillez rééssayer</p>"
+                    + "</div></div>");
+            
+        }
+        
+    }
+   
+%>
+       
+
+
+
+<!-- End Hero -->
+
 <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -70,15 +105,17 @@
     
     
     <% 
+        Compte leCompteAcc=(Compte)session.getAttribute("compte");
+        
         if(session.getAttribute("login").equals(false)){ %>
             <%@ include file="../components/connexionBanner.jsp"%>
        <% }else{ %>
+       <% if(leCompteAcc.getLeRole() != null){ %>
+            <%@ include file="../components/proDashboard.jsp"%>
+       <% }else{ %>
             <%@ include file="../components/dashboardBanner.jsp"%>
        <% } %>
+       <% } %>
 
-
-    
-
-   
     
 <%@include file="../components/footer.jsp" %>

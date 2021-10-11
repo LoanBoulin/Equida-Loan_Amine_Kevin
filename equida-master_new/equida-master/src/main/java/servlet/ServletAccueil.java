@@ -61,7 +61,10 @@ public class ServletAccueil extends HttpServlet {
         if(url.equals("/equida/ServletAccueil/accueil"))
         {  
             
-            getServletContext().getRequestDispatcher("/vues/accueil/accueil.jsp").forward(request, response);
+            String compteStatut = (String)request.getParameter("compte");            
+            //Mise en paramètres
+            request.setAttribute("pLeCompte", compteStatut);        
+            getServletContext().getRequestDispatcher("/vues/accueil/accueil.jsp").forward(request, response);          
       
         }
     }

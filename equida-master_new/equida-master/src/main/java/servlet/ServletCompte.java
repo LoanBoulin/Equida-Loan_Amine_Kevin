@@ -159,11 +159,11 @@ public class ServletCompte extends HttpServlet {
                     // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
                     Compte compteInsere =  CompteDAO.ajouterCompteClient(connection, unCompte.getLeClient(), unCompte);
                     if (compteInsere != null ){
-                        this.getServletContext().getRequestDispatcher("/vues/client/consulterClient.jsp" ).forward( request, response );
+                        response.sendRedirect("../ServletAccueil/accueil?compte=1");
                     }
                     else 
                     {
-                        this.getServletContext().getRequestDispatcher("/vues/client/consulterClient.jsp" ).forward( request, response );
+                        response.sendRedirect("../ServletAccueil/accueil?compte=0");
                     }
                 }
                 else
@@ -174,10 +174,8 @@ public class ServletCompte extends HttpServlet {
                     request.setAttribute("pLesPays", lesPays);
                     request.setAttribute("pLesRoles", lesRoles);
 
-                    //ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-                    //request.setAttribute("pLesCategVente", lesCategVentes);
 
-                   this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp" ).forward( request, response );
+                   this.getServletContext().getRequestDispatcher("/vues/compte/ajouterCompteClient.jsp" ).forward( request, response );
                    
                 }
                 
@@ -204,11 +202,11 @@ public class ServletCompte extends HttpServlet {
                     // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
                     Compte compteInsere =  CompteDAO.ajouterComptePro(connection, unCompte);
                     if (compteInsere != null ){
-                        this.getServletContext().getRequestDispatcher("/vues/client/consulterClaaient.jsp" ).forward( request, response );
+                         response.sendRedirect("../ServletAccueil/accueil?compte=1");
                     }
                     else 
                     {
-                        this.getServletContext().getRequestDispatcher("/vues/client/consulterClaaient.jsp" ).forward( request, response );
+                        response.sendRedirect("../ServletAccueil/accueil?compte=0");
                     }
                 }
                 else
@@ -216,11 +214,8 @@ public class ServletCompte extends HttpServlet {
                     // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
                     ArrayList<Role> lesRoles = RoleDAO.getLesRoles(connection);
                     request.setAttribute("pLesRoles", lesRoles);
-
-                    //ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-                    //request.setAttribute("pLesCategVente", lesCategVentes);
                    
-                   this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp" ).forward( request, response );
+                   this.getServletContext().getRequestDispatcher("/vues/compte/ajouterComptePro.jsp" ).forward( request, response );
                    
                 }
                 
@@ -245,10 +240,9 @@ public class ServletCompte extends HttpServlet {
                 if (form.getErreurs().isEmpty()){
                     // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
                     unCompte = CompteDAO.verifCompte(connection, unCompte);  
-                    System.out.println(unCompte);
+
                     if (unCompte == null){
                         
-                        System.out.println("compte null");
                         
                         HttpSession session = request.getSession(true);
                         session.setAttribute("login", false);                    
