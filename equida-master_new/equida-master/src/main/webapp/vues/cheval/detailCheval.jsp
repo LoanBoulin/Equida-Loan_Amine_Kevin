@@ -4,6 +4,7 @@
     Author     : loanb
 --%>
 
+<%@page import="model.Enchere"%>
 <%@page import="model.Cheval"%>
 <%@page import="model.TypeCheval"%>
 <%@page import="model.Lot"%>
@@ -79,6 +80,10 @@
                 <li><strong>Date de naissance : </strong><% out.println(leCheval.getDateNaissance()); %></li>
               </ul>
             </div>
+              
+              
+              
+              
             <div class="portfolio-info">
               <h3>Parents</h3>
               <ul>
@@ -112,23 +117,66 @@
                 
                 
               %> </li>
+                                              
               </ul>
             </div>
+              
+              
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
+                <div class="row">
+                    <h2 class="col-8">Enchères récentes</h2>
+                    <% out.println("<a class='col-3' href ='../ServletEnchere/listerLesEncheresParCheval?codeChe="+ leCheval.getId()+ "'>Voir plus</a>"); %>
+                </div>
+             <table  class="table table-bordered table-striped table-condensed">  
+            <thead>
+                <tr>             
+                    <th>Id</th>
+                    <th>Client</th>
+                    <th>Prix base</th>
+                    <th>Montant</th>
+                    <th>Vente</th>                   
+
+                </tr>
+            </thead>
+            <tbody>
+              
+                    <%
+                          ArrayList<Enchere> lesEncheres = (ArrayList)request.getAttribute("plesEncheres");
+                        
+                    for(int i = 0; i < lesEncheres.size();i++)
+                    {
+                        Enchere uneEnchere = lesEncheres.get(i);
+                        
+                        out.println("<tr><td>");
+                        out.println(uneEnchere.getId());
+                        out.println("</a></td>");
+
+                        out.println("<td><a href ='../ServletClien/profilClient?cliId="+ uneEnchere.getLeClient().getId() + "'>");
+                        out.println(uneEnchere.getLeClient().getPrenom() + " " + uneEnchere.getLeClient().getNom());
+                        out.println("</td>");
+
+                        out.println("<td>");
+                        out.println(uneEnchere.getLeLot().getPrix());
+                        out.println("€</td>");
+                        
+                        out.println("<td>");
+                        out.println(uneEnchere.getMontant());
+                        out.println("€</td>");
+
+                        out.println("<td><a href ='../ServletVente/venteDetail?venId="+ uneEnchere.getLaVente().getId()+ "'>");
+                        out.println(uneEnchere.getLaVente().getNom());
+                        out.println("</a></td>");
+                                              
+                               
+                    }
+                    %>
+           
+            </tbody>
+        </table>
             </div>
           </div>
               
-              
-              
-             
-              
-              
-              
-              
+           
 
         </div>
 

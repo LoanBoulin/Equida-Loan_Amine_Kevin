@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : mer. 22 sep. 2021 à 12:08
--- Version du serveur :  10.4.14-MariaDB
--- Version de PHP : 7.4.10
+-- Hôte : 127.0.0.1:3306
+-- Généré le : mer. 13 oct. 2021 à 09:38
+-- Version du serveur :  5.7.31
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,19 +27,22 @@ SET time_zone = "+00:00";
 -- Structure de la table `acheteur`
 --
 
-CREATE TABLE `acheteur` (
-  `CLI_ID` int(2) NOT NULL
+DROP TABLE IF EXISTS `acheteur`;
+CREATE TABLE IF NOT EXISTS `acheteur` (
+  `CLI_ID` int(2) NOT NULL,
+  `CLI_FORMATION` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`CLI_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `acheteur`
 --
 
-INSERT INTO `acheteur` (`CLI_ID`) VALUES
-(1),
-(3),
-(6),
-(7);
+INSERT INTO `acheteur` (`CLI_ID`, `CLI_FORMATION`) VALUES
+(1, NULL),
+(3, NULL),
+(6, NULL),
+(7, NULL);
 
 -- --------------------------------------------------------
 
@@ -47,9 +50,13 @@ INSERT INTO `acheteur` (`CLI_ID`) VALUES
 -- Structure de la table `ach_cat`
 --
 
-CREATE TABLE `ach_cat` (
+DROP TABLE IF EXISTS `ach_cat`;
+CREATE TABLE IF NOT EXISTS `ach_cat` (
   `CLI_ID` int(2) NOT NULL,
-  `CAT_CODE` char(6) NOT NULL
+  `CAT_CODE` char(6) NOT NULL,
+  PRIMARY KEY (`CLI_ID`,`CAT_CODE`),
+  KEY `I_FK_ACH_CAT_ACHETEUR` (`CLI_ID`),
+  KEY `I_FK_ACH_CAT_CATEGVENTE` (`CAT_CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -70,9 +77,11 @@ INSERT INTO `ach_cat` (`CLI_ID`, `CAT_CODE`) VALUES
 -- Structure de la table `categvente`
 --
 
-CREATE TABLE `categvente` (
+DROP TABLE IF EXISTS `categvente`;
+CREATE TABLE IF NOT EXISTS `categvente` (
   `CAT_CODE` char(6) NOT NULL,
-  `CAT_LIBELLE` char(32) DEFAULT NULL
+  `CAT_LIBELLE` char(32) DEFAULT NULL,
+  PRIMARY KEY (`CAT_CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -91,37 +100,35 @@ INSERT INTO `categvente` (`CAT_CODE`, `CAT_LIBELLE`) VALUES
 -- Structure de la table `cheval`
 --
 
-CREATE TABLE `cheval` (
-  `CHE_ID` int(2) NOT NULL,
+DROP TABLE IF EXISTS `cheval`;
+CREATE TABLE IF NOT EXISTS `cheval` (
+  `CHE_ID` int(2) NOT NULL AUTO_INCREMENT,
   `TYP_ID` int(2) NOT NULL,
   `CHE_NOM` char(32) DEFAULT NULL,
   `CHE_SEXE` char(1) DEFAULT NULL,
   `CHE_SIRE` char(32) DEFAULT NULL,
-  `CHE_DATENAISSANCE` char(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `CHE_DATENAISSANCE` char(32) DEFAULT NULL,
+  `CHE_NOMIMAGE` varchar(200) DEFAULT NULL,
+  `CHE_IDPERE` int(11) DEFAULT NULL,
+  `CHE_IDMERE` int(11) DEFAULT NULL,
+  PRIMARY KEY (`CHE_ID`),
+  KEY `I_FK_CHEVAL_TYPECHEVAL` (`TYP_ID`),
+  KEY `FK_CHEVAL_IDPERE` (`CHE_IDPERE`),
+  KEY `FK_CHEVAL_IDMERE` (`CHE_IDMERE`)
+) ENGINE=InnoDB AUTO_INCREMENT=956 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `cheval`
 --
 
-INSERT INTO `cheval` (`CHE_ID`, `TYP_ID`, `CHE_NOM`, `CHE_SEXE`, `CHE_SIRE`, `CHE_DATENAISSANCE`) VALUES
-(23, 4, 'Starlight', 'F', '53 525 354 I', '16-04-2015'),
-(321, 1, 'Jack', 'M', '89 432 642 A', '13-07-2012'),
-(742, 6, 'Dior', 'F', '54 325 346 G', '20-02-2015'),
-(865, 3, 'Mambo', 'M', '65 352 604 F', '15-09-2016'),
-(943, 4, 'Suzanna', 'F', '75 655 983 J', '22-01-2011'),
-(954, 2, 'Pepito', 'M', '85 425 092 N', '03-06-2005');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `che_ref`
---
-
-CREATE TABLE `che_ref` (
-  `CHE_ID` int(2) NOT NULL,
-  `CHE_ID_1` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `cheval` (`CHE_ID`, `TYP_ID`, `CHE_NOM`, `CHE_SEXE`, `CHE_SIRE`, `CHE_DATENAISSANCE`, `CHE_NOMIMAGE`, `CHE_IDPERE`, `CHE_IDMERE`) VALUES
+(23, 4, 'Starlight', 'F', '53 525 354 I', '16-04-2015', 'starlight.jpg', NULL, NULL),
+(321, 1, 'Jack', 'M', '89 432 642 A', '13-07-2012', NULL, 954, 943),
+(742, 6, 'Dior', 'F', '54 325 346 G', '20-02-2015', 'dior.jpg', NULL, 943),
+(865, 3, 'Mambo', 'M', '65 352 604 F', '15-09-2016', NULL, 954, NULL),
+(943, 4, 'Suzanna', 'F', '75 655 983 J', '22-01-2011', NULL, NULL, NULL),
+(954, 2, 'Pepito', 'M', '85 425 092 N', '03-06-2005', NULL, NULL, NULL),
+(955, 1, 'aa', 'a', 'aaaa', 'aaaa', NULL, 943, 742);
 
 -- --------------------------------------------------------
 
@@ -129,8 +136,9 @@ CREATE TABLE `che_ref` (
 -- Structure de la table `client`
 --
 
-CREATE TABLE `client` (
-  `CLI_ID` int(2) NOT NULL,
+DROP TABLE IF EXISTS `client`;
+CREATE TABLE IF NOT EXISTS `client` (
+  `CLI_ID` int(2) NOT NULL AUTO_INCREMENT,
   `CODE` char(3) NOT NULL,
   `CLI_TITRE` char(32) DEFAULT NULL,
   `CLI_NOM` char(32) DEFAULT NULL,
@@ -138,8 +146,10 @@ CREATE TABLE `client` (
   `CLI_RUE` char(50) DEFAULT NULL,
   `CLI_COPOS` char(32) DEFAULT NULL,
   `CLI_VILLE` char(50) DEFAULT NULL,
-  `CLI_ADRESSEMESSAGERIE` char(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `CLI_ADRESSEMESSAGERIE` char(50) DEFAULT NULL,
+  PRIMARY KEY (`CLI_ID`),
+  KEY `I_FK_CLIENT_PAYS` (`CODE`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `client`
@@ -163,23 +173,25 @@ INSERT INTO `client` (`CLI_ID`, `CODE`, `CLI_TITRE`, `CLI_NOM`, `CLI_PRENOM`, `C
 -- Structure de la table `compte`
 --
 
-CREATE TABLE `compte` (
-  `COM_ID` int(2) NOT NULL,
-  `CLI_ID` int(2) NOT NULL,
+DROP TABLE IF EXISTS `compte`;
+CREATE TABLE IF NOT EXISTS `compte` (
+  `COM_ID` int(2) NOT NULL AUTO_INCREMENT,
+  `CLI_ID` int(2) DEFAULT NULL,
+  `ROL_ID` int(11) DEFAULT NULL,
   `COM_LOGIN` char(32) DEFAULT NULL,
-  `COM_MDP` char(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+  `COM_MDP` char(32) DEFAULT NULL,
+  PRIMARY KEY (`COM_ID`),
+  UNIQUE KEY `I_FK_COMPTE_CLIENT` (`CLI_ID`),
+  KEY `FK_COMPTE_ROLE` (`ROL_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
 --
--- Structure de la table `com_rol`
+-- Déchargement des données de la table `compte`
 --
 
-CREATE TABLE `com_rol` (
-  `COM_ID` int(2) NOT NULL,
-  `ROL_CODE` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `compte` (`COM_ID`, `CLI_ID`, `ROL_ID`, `COM_LOGIN`, `COM_MDP`) VALUES
+(28, 1, NULL, 'cdeltour', 'cheval'),
+(29, NULL, 1, 'joris', 'mpjojo');
 
 -- --------------------------------------------------------
 
@@ -187,13 +199,16 @@ CREATE TABLE `com_rol` (
 -- Structure de la table `courriel`
 --
 
-CREATE TABLE `courriel` (
-  `COU_ID` int(2) NOT NULL,
+DROP TABLE IF EXISTS `courriel`;
+CREATE TABLE IF NOT EXISTS `courriel` (
+  `COU_ID` int(2) NOT NULL AUTO_INCREMENT,
   `VEN_ID` int(2) NOT NULL,
   `COU_DATE` char(50) DEFAULT NULL,
   `COU_OBJET` char(250) DEFAULT NULL,
-  `COU_CORPS` char(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `COU_CORPS` char(250) DEFAULT NULL,
+  PRIMARY KEY (`COU_ID`),
+  KEY `I_FK_COURRIEL_VENTE` (`VEN_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `courriel`
@@ -209,11 +224,13 @@ INSERT INTO `courriel` (`COU_ID`, `VEN_ID`, `COU_DATE`, `COU_OBJET`, `COU_CORPS`
 -- Structure de la table `course`
 --
 
-CREATE TABLE `course` (
-  `COU_ID` int(2) NOT NULL,
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE IF NOT EXISTS `course` (
+  `COU_ID` int(2) NOT NULL AUTO_INCREMENT,
   `COU_NOM` char(32) DEFAULT NULL,
   `COU_LIEU` char(50) DEFAULT NULL,
-  `COU_DATE` char(32) DEFAULT NULL
+  `COU_DATE` char(32) DEFAULT NULL,
+  PRIMARY KEY (`COU_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -222,9 +239,13 @@ CREATE TABLE `course` (
 -- Structure de la table `cou_pie`
 --
 
-CREATE TABLE `cou_pie` (
+DROP TABLE IF EXISTS `cou_pie`;
+CREATE TABLE IF NOT EXISTS `cou_pie` (
   `COU_ID` int(2) NOT NULL,
-  `PIE_ID` int(2) NOT NULL
+  `PIE_ID` int(2) NOT NULL,
+  PRIMARY KEY (`COU_ID`,`PIE_ID`),
+  KEY `I_FK_COU_PIE_COURRIEL` (`COU_ID`),
+  KEY `I_FK_COU_PIE_PIECEJOINTE` (`PIE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -241,13 +262,25 @@ INSERT INTO `cou_pie` (`COU_ID`, `PIE_ID`) VALUES
 -- Structure de la table `enchere`
 --
 
-CREATE TABLE `enchere` (
-  `ENC_NUMERO` int(2) NOT NULL,
+DROP TABLE IF EXISTS `enchere`;
+CREATE TABLE IF NOT EXISTS `enchere` (
+  `ENC_NUMERO` int(2) NOT NULL AUTO_INCREMENT,
   `LOT_ID` int(2) NOT NULL,
   `VEN_ID` int(2) NOT NULL,
   `CLI_ID` int(2) NOT NULL,
-  `ENC_MONTANT` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `ENC_MONTANT` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`ENC_NUMERO`),
+  KEY `I_FK_ENCHERE_LOT` (`VEN_ID`,`LOT_ID`),
+  KEY `I_FK_ENCHERE_ACHETEUR` (`CLI_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `enchere`
+--
+
+INSERT INTO `enchere` (`ENC_NUMERO`, `LOT_ID`, `VEN_ID`, `CLI_ID`, `ENC_MONTANT`) VALUES
+(1, 1, 90217, 1, '2459.00'),
+(2, 1, 90217, 3, '2789.00');
 
 -- --------------------------------------------------------
 
@@ -255,12 +288,14 @@ CREATE TABLE `enchere` (
 -- Structure de la table `jockey`
 --
 
-CREATE TABLE `jockey` (
-  `JOC_ID` int(2) NOT NULL,
+DROP TABLE IF EXISTS `jockey`;
+CREATE TABLE IF NOT EXISTS `jockey` (
+  `JOC_ID` int(2) NOT NULL AUTO_INCREMENT,
   `JOC_NOM` char(32) DEFAULT NULL,
   `JOC_PRENOM` char(32) DEFAULT NULL,
   `JOC_DATENAISSANCE` char(32) DEFAULT NULL,
-  `JOC_POIDS` int(2) DEFAULT NULL
+  `JOC_POIDS` int(2) DEFAULT NULL,
+  PRIMARY KEY (`JOC_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -269,12 +304,14 @@ CREATE TABLE `jockey` (
 -- Structure de la table `lieu`
 --
 
-CREATE TABLE `lieu` (
-  `LIE_ID` int(2) NOT NULL,
+DROP TABLE IF EXISTS `lieu`;
+CREATE TABLE IF NOT EXISTS `lieu` (
+  `LIE_ID` int(2) NOT NULL AUTO_INCREMENT,
   `LIE_VILLE` char(50) DEFAULT NULL,
   `LIE_NBBOXES` int(5) DEFAULT NULL,
-  `LIE_COMMENTAIRES` char(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `LIE_COMMENTAIRES` char(250) DEFAULT NULL,
+  PRIMARY KEY (`LIE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `lieu`
@@ -290,24 +327,29 @@ INSERT INTO `lieu` (`LIE_ID`, `LIE_VILLE`, `LIE_NBBOXES`, `LIE_COMMENTAIRES`) VA
 -- Structure de la table `lot`
 --
 
-CREATE TABLE `lot` (
+DROP TABLE IF EXISTS `lot`;
+CREATE TABLE IF NOT EXISTS `lot` (
+  `LOT_ID` int(11) NOT NULL AUTO_INCREMENT,
   `VEN_ID` int(2) NOT NULL,
-  `LOT_ID` int(2) NOT NULL,
   `CHE_ID` int(2) NOT NULL,
-  `LOT_PRIXDEPART` int(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `LOT_PRIXDEPART` int(6) DEFAULT NULL,
+  PRIMARY KEY (`VEN_ID`,`LOT_ID`),
+  UNIQUE KEY `LOT_ID` (`LOT_ID`),
+  KEY `I_FK_LOT_VENTE` (`VEN_ID`),
+  KEY `I_FK_LOT_CHEVAL` (`CHE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `lot`
 --
 
-INSERT INTO `lot` (`VEN_ID`, `LOT_ID`, `CHE_ID`, `LOT_PRIXDEPART`) VALUES
-(90217, 1, 742, 7500),
-(90217, 2, 321, 10999),
-(90217, 3, 23, 6999),
-(90217, 4, 865, 14000),
-(90217, 5, 943, 8700),
-(90217, 6, 954, 9900);
+INSERT INTO `lot` (`LOT_ID`, `VEN_ID`, `CHE_ID`, `LOT_PRIXDEPART`) VALUES
+(1, 90217, 742, 7500),
+(2, 90217, 321, 10999),
+(3, 90217, 23, 6999),
+(4, 90217, 865, 14000),
+(5, 90217, 943, 8700),
+(6, 90217, 954, 9900);
 
 -- --------------------------------------------------------
 
@@ -315,10 +357,14 @@ INSERT INTO `lot` (`VEN_ID`, `LOT_ID`, `CHE_ID`, `LOT_PRIXDEPART`) VALUES
 -- Structure de la table `participer`
 --
 
-CREATE TABLE `participer` (
+DROP TABLE IF EXISTS `participer`;
+CREATE TABLE IF NOT EXISTS `participer` (
   `CHE_ID` int(2) NOT NULL,
   `COU_ID` int(2) NOT NULL,
-  `PLACE` int(2) DEFAULT NULL
+  `PLACE` int(2) DEFAULT NULL,
+  PRIMARY KEY (`CHE_ID`,`COU_ID`),
+  KEY `I_FK_PARTICIPER_CHEVAL` (`CHE_ID`),
+  KEY `I_FK_PARTICIPER_COURSE` (`COU_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -327,9 +373,11 @@ CREATE TABLE `participer` (
 -- Structure de la table `pays`
 --
 
-CREATE TABLE `pays` (
+DROP TABLE IF EXISTS `pays`;
+CREATE TABLE IF NOT EXISTS `pays` (
   `CODE` char(3) NOT NULL,
-  `NOM` char(50) DEFAULT NULL
+  `NOM` char(50) DEFAULT NULL,
+  PRIMARY KEY (`CODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -343,25 +391,16 @@ INSERT INTO `pays` (`CODE`, `NOM`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `permissions`
---
-
-CREATE TABLE `permissions` (
-  `PER_CODE` int(2) NOT NULL,
-  `PER_NOM` char(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `piecejointe`
 --
 
-CREATE TABLE `piecejointe` (
-  `PIE_ID` int(2) NOT NULL,
+DROP TABLE IF EXISTS `piecejointe`;
+CREATE TABLE IF NOT EXISTS `piecejointe` (
+  `PIE_ID` int(2) NOT NULL AUTO_INCREMENT,
   `PIE_CHEMIN` char(32) DEFAULT NULL,
-  `PIE_DESCRIPTION` char(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `PIE_DESCRIPTION` char(100) DEFAULT NULL,
+  PRIMARY KEY (`PIE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `piecejointe`
@@ -377,21 +416,20 @@ INSERT INTO `piecejointe` (`PIE_ID`, `PIE_CHEMIN`, `PIE_DESCRIPTION`) VALUES
 -- Structure de la table `role`
 --
 
-CREATE TABLE `role` (
-  `ROL_CODE` int(2) NOT NULL,
-  `ROL_NOM` char(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE IF NOT EXISTS `role` (
+  `ROL_CODE` int(2) NOT NULL AUTO_INCREMENT,
+  `ROL_NOM` char(32) DEFAULT NULL,
+  PRIMARY KEY (`ROL_CODE`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
--- Structure de la table `rol_per`
+-- Déchargement des données de la table `role`
 --
 
-CREATE TABLE `rol_per` (
-  `ROL_CODE` int(2) NOT NULL,
-  `PER_CODE` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `role` (`ROL_CODE`, `ROL_NOM`) VALUES
+(1, 'Salarie'),
+(2, 'Admin');
 
 -- --------------------------------------------------------
 
@@ -399,11 +437,13 @@ CREATE TABLE `rol_per` (
 -- Structure de la table `typecheval`
 --
 
-CREATE TABLE `typecheval` (
-  `TYP_ID` int(2) NOT NULL,
+DROP TABLE IF EXISTS `typecheval`;
+CREATE TABLE IF NOT EXISTS `typecheval` (
+  `TYP_ID` int(2) NOT NULL AUTO_INCREMENT,
   `TYP_LIBELLE` char(100) DEFAULT NULL,
-  `TYP_DESCRIPTION` char(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `TYP_DESCRIPTION` char(100) DEFAULT NULL,
+  PRIMARY KEY (`TYP_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `typecheval`
@@ -412,10 +452,10 @@ CREATE TABLE `typecheval` (
 INSERT INTO `typecheval` (`TYP_ID`, `TYP_LIBELLE`, `TYP_DESCRIPTION`) VALUES
 (1, 'Yearlings', 'Yearling est un anglicisme désignant un cheval pur-sang anglais, descendant du pur sang arabe.'),
 (2, 'Pur-sang anglais', 'Le Pur-sang Anglais est la plus connue des races de chevaux à sang chaud. C\'est l\'une des races les'),
-(3, 'Inédits', 'Les inédits sont les chevaux qui n\'ont jamais participé à une vente.'),
-(4, 'Pur-sang arabes', 'Le pur-sang arable est un cheval de selle qui ne passe pas inaperçu et on parle souvent de lui comme'),
-(5, 'Etalons', 'Un étalon est un cheval mâle accepté pour se reproduire, généralement voué à la reproduction.'),
-(6, 'Poulinières', 'Une poulinière est une jument destinée à la reproduction.');
+(3, 'Inédit', 'Les inédits sont les chevaux qui n\'ont jamais participé à une vente.'),
+(4, 'Pur-sang arabe', 'Le pur-sang arable est un cheval de selle qui ne passe pas inaperçu et on parle souvent de lui comme'),
+(5, 'Etalon', 'Un étalon est un cheval mâle accepté pour se reproduire, généralement voué à la reproduction.'),
+(6, 'Poulinière', 'Une poulinière est une jument destinée à la reproduction.');
 
 -- --------------------------------------------------------
 
@@ -423,9 +463,13 @@ INSERT INTO `typecheval` (`TYP_ID`, `TYP_LIBELLE`, `TYP_DESCRIPTION`) VALUES
 -- Structure de la table `typ_ven`
 --
 
-CREATE TABLE `typ_ven` (
+DROP TABLE IF EXISTS `typ_ven`;
+CREATE TABLE IF NOT EXISTS `typ_ven` (
   `VEN_ID` int(2) NOT NULL,
-  `TYP_ID` int(2) NOT NULL
+  `TYP_ID` int(2) NOT NULL,
+  PRIMARY KEY (`VEN_ID`,`TYP_ID`),
+  KEY `I_FK_TYP_VEN_VENTE` (`VEN_ID`),
+  KEY `I_FK_TYP_VEN_TYPECHEVAL` (`TYP_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -434,8 +478,11 @@ CREATE TABLE `typ_ven` (
 -- Structure de la table `vendeur`
 --
 
-CREATE TABLE `vendeur` (
-  `CLI_ID` int(2) NOT NULL
+DROP TABLE IF EXISTS `vendeur`;
+CREATE TABLE IF NOT EXISTS `vendeur` (
+  `CLI_ID` int(2) NOT NULL,
+  `CLI_CA` int(20) NOT NULL,
+  PRIMARY KEY (`CLI_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -444,12 +491,16 @@ CREATE TABLE `vendeur` (
 -- Structure de la table `vente`
 --
 
-CREATE TABLE `vente` (
+DROP TABLE IF EXISTS `vente`;
+CREATE TABLE IF NOT EXISTS `vente` (
   `VEN_ID` int(2) NOT NULL,
   `CAT_CODE` char(6) NOT NULL,
   `LIE_ID` int(2) NOT NULL,
   `VEN_NOM` char(32) DEFAULT NULL,
-  `VEN_DATEDEBUTVENTE` char(50) DEFAULT NULL
+  `VEN_DATEDEBUTVENTE` char(50) DEFAULT NULL,
+  PRIMARY KEY (`VEN_ID`),
+  KEY `I_FK_VENTE_CATEGVENTE` (`CAT_CODE`),
+  KEY `I_FK_VENTE_LIEU` (`LIE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -469,196 +520,14 @@ INSERT INTO `vente` (`VEN_ID`, `CAT_CODE`, `LIE_ID`, `VEN_NOM`, `VEN_DATEDEBUTVE
 -- Structure de la table `ven_che`
 --
 
-CREATE TABLE `ven_che` (
+DROP TABLE IF EXISTS `ven_che`;
+CREATE TABLE IF NOT EXISTS `ven_che` (
   `CLI_ID` int(2) NOT NULL,
-  `CHE_ID` int(2) NOT NULL
+  `CHE_ID` int(2) NOT NULL,
+  PRIMARY KEY (`CLI_ID`,`CHE_ID`),
+  KEY `I_FK_VEN_CHE_VENDEUR` (`CLI_ID`),
+  KEY `I_FK_VEN_CHE_CHEVAL` (`CHE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `acheteur`
---
-ALTER TABLE `acheteur`
-  ADD PRIMARY KEY (`CLI_ID`);
-
---
--- Index pour la table `ach_cat`
---
-ALTER TABLE `ach_cat`
-  ADD PRIMARY KEY (`CLI_ID`,`CAT_CODE`),
-  ADD KEY `I_FK_ACH_CAT_ACHETEUR` (`CLI_ID`),
-  ADD KEY `I_FK_ACH_CAT_CATEGVENTE` (`CAT_CODE`);
-
---
--- Index pour la table `categvente`
---
-ALTER TABLE `categvente`
-  ADD PRIMARY KEY (`CAT_CODE`);
-
---
--- Index pour la table `cheval`
---
-ALTER TABLE `cheval`
-  ADD PRIMARY KEY (`CHE_ID`),
-  ADD KEY `I_FK_CHEVAL_TYPECHEVAL` (`TYP_ID`);
-
---
--- Index pour la table `che_ref`
---
-ALTER TABLE `che_ref`
-  ADD PRIMARY KEY (`CHE_ID`,`CHE_ID_1`),
-  ADD KEY `I_FK_CHE_REF_CHEVAL` (`CHE_ID`),
-  ADD KEY `I_FK_CHE_REF_CHEVAL1` (`CHE_ID_1`);
-
---
--- Index pour la table `client`
---
-ALTER TABLE `client`
-  ADD PRIMARY KEY (`CLI_ID`),
-  ADD KEY `I_FK_CLIENT_PAYS` (`CODE`);
-
---
--- Index pour la table `compte`
---
-ALTER TABLE `compte`
-  ADD PRIMARY KEY (`COM_ID`),
-  ADD UNIQUE KEY `I_FK_COMPTE_CLIENT` (`CLI_ID`);
-
---
--- Index pour la table `com_rol`
---
-ALTER TABLE `com_rol`
-  ADD PRIMARY KEY (`COM_ID`,`ROL_CODE`),
-  ADD KEY `I_FK_COM_ROL_COMPTE` (`COM_ID`),
-  ADD KEY `I_FK_COM_ROL_ROLE` (`ROL_CODE`);
-
---
--- Index pour la table `courriel`
---
-ALTER TABLE `courriel`
-  ADD PRIMARY KEY (`COU_ID`),
-  ADD KEY `I_FK_COURRIEL_VENTE` (`VEN_ID`);
-
---
--- Index pour la table `course`
---
-ALTER TABLE `course`
-  ADD PRIMARY KEY (`COU_ID`);
-
---
--- Index pour la table `cou_pie`
---
-ALTER TABLE `cou_pie`
-  ADD PRIMARY KEY (`COU_ID`,`PIE_ID`),
-  ADD KEY `I_FK_COU_PIE_COURRIEL` (`COU_ID`),
-  ADD KEY `I_FK_COU_PIE_PIECEJOINTE` (`PIE_ID`);
-
---
--- Index pour la table `enchere`
---
-ALTER TABLE `enchere`
-  ADD PRIMARY KEY (`ENC_NUMERO`),
-  ADD KEY `I_FK_ENCHERE_LOT` (`VEN_ID`,`LOT_ID`),
-  ADD KEY `I_FK_ENCHERE_ACHETEUR` (`CLI_ID`);
-
---
--- Index pour la table `jockey`
---
-ALTER TABLE `jockey`
-  ADD PRIMARY KEY (`JOC_ID`);
-
---
--- Index pour la table `lieu`
---
-ALTER TABLE `lieu`
-  ADD PRIMARY KEY (`LIE_ID`);
-
---
--- Index pour la table `lot`
---
-ALTER TABLE `lot`
-  ADD PRIMARY KEY (`VEN_ID`,`LOT_ID`),
-  ADD KEY `I_FK_LOT_VENTE` (`VEN_ID`),
-  ADD KEY `I_FK_LOT_CHEVAL` (`CHE_ID`);
-
---
--- Index pour la table `participer`
---
-ALTER TABLE `participer`
-  ADD PRIMARY KEY (`CHE_ID`,`COU_ID`),
-  ADD KEY `I_FK_PARTICIPER_CHEVAL` (`CHE_ID`),
-  ADD KEY `I_FK_PARTICIPER_COURSE` (`COU_ID`);
-
---
--- Index pour la table `pays`
---
-ALTER TABLE `pays`
-  ADD PRIMARY KEY (`CODE`);
-
---
--- Index pour la table `permissions`
---
-ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`PER_CODE`);
-
---
--- Index pour la table `piecejointe`
---
-ALTER TABLE `piecejointe`
-  ADD PRIMARY KEY (`PIE_ID`);
-
---
--- Index pour la table `role`
---
-ALTER TABLE `role`
-  ADD PRIMARY KEY (`ROL_CODE`);
-
---
--- Index pour la table `rol_per`
---
-ALTER TABLE `rol_per`
-  ADD PRIMARY KEY (`ROL_CODE`,`PER_CODE`),
-  ADD KEY `I_FK_ROL_PER_ROLE` (`ROL_CODE`),
-  ADD KEY `I_FK_ROL_PER_PERMISSIONS` (`PER_CODE`);
-
---
--- Index pour la table `typecheval`
---
-ALTER TABLE `typecheval`
-  ADD PRIMARY KEY (`TYP_ID`);
-
---
--- Index pour la table `typ_ven`
---
-ALTER TABLE `typ_ven`
-  ADD PRIMARY KEY (`VEN_ID`,`TYP_ID`),
-  ADD KEY `I_FK_TYP_VEN_VENTE` (`VEN_ID`),
-  ADD KEY `I_FK_TYP_VEN_TYPECHEVAL` (`TYP_ID`);
-
---
--- Index pour la table `vendeur`
---
-ALTER TABLE `vendeur`
-  ADD PRIMARY KEY (`CLI_ID`);
-
---
--- Index pour la table `vente`
---
-ALTER TABLE `vente`
-  ADD PRIMARY KEY (`VEN_ID`),
-  ADD KEY `I_FK_VENTE_CATEGVENTE` (`CAT_CODE`),
-  ADD KEY `I_FK_VENTE_LIEU` (`LIE_ID`);
-
---
--- Index pour la table `ven_che`
---
-ALTER TABLE `ven_che`
-  ADD PRIMARY KEY (`CLI_ID`,`CHE_ID`),
-  ADD KEY `I_FK_VEN_CHE_VENDEUR` (`CLI_ID`),
-  ADD KEY `I_FK_VEN_CHE_CHEVAL` (`CHE_ID`);
 
 --
 -- Contraintes pour les tables déchargées
@@ -681,14 +550,9 @@ ALTER TABLE `ach_cat`
 -- Contraintes pour la table `cheval`
 --
 ALTER TABLE `cheval`
+  ADD CONSTRAINT `FK_CHEVAL_IDMERE` FOREIGN KEY (`CHE_IDMERE`) REFERENCES `cheval` (`CHE_ID`),
+  ADD CONSTRAINT `FK_CHEVAL_IDPERE` FOREIGN KEY (`CHE_IDPERE`) REFERENCES `cheval` (`CHE_ID`),
   ADD CONSTRAINT `FK_CHEVAL_TYPECHEVAL` FOREIGN KEY (`TYP_ID`) REFERENCES `typecheval` (`TYP_ID`);
-
---
--- Contraintes pour la table `che_ref`
---
-ALTER TABLE `che_ref`
-  ADD CONSTRAINT `FK_CHE_REF_CHEVAL` FOREIGN KEY (`CHE_ID`) REFERENCES `cheval` (`CHE_ID`),
-  ADD CONSTRAINT `FK_CHE_REF_CHEVAL1` FOREIGN KEY (`CHE_ID_1`) REFERENCES `cheval` (`CHE_ID`);
 
 --
 -- Contraintes pour la table `client`
@@ -700,14 +564,8 @@ ALTER TABLE `client`
 -- Contraintes pour la table `compte`
 --
 ALTER TABLE `compte`
-  ADD CONSTRAINT `FK_COMPTE_CLIENT` FOREIGN KEY (`CLI_ID`) REFERENCES `client` (`CLI_ID`);
-
---
--- Contraintes pour la table `com_rol`
---
-ALTER TABLE `com_rol`
-  ADD CONSTRAINT `FK_COM_ROL_COMPTE` FOREIGN KEY (`COM_ID`) REFERENCES `compte` (`COM_ID`),
-  ADD CONSTRAINT `FK_COM_ROL_ROLE` FOREIGN KEY (`ROL_CODE`) REFERENCES `role` (`ROL_CODE`);
+  ADD CONSTRAINT `FK_COMPTE_CLIENT` FOREIGN KEY (`CLI_ID`) REFERENCES `client` (`CLI_ID`),
+  ADD CONSTRAINT `FK_COMPTE_ROLE` FOREIGN KEY (`ROL_ID`) REFERENCES `role` (`ROL_CODE`);
 
 --
 -- Contraintes pour la table `courriel`
@@ -742,13 +600,6 @@ ALTER TABLE `lot`
 ALTER TABLE `participer`
   ADD CONSTRAINT `FK_PARTICIPER_CHEVAL` FOREIGN KEY (`CHE_ID`) REFERENCES `cheval` (`CHE_ID`),
   ADD CONSTRAINT `FK_PARTICIPER_COURSE` FOREIGN KEY (`COU_ID`) REFERENCES `course` (`COU_ID`);
-
---
--- Contraintes pour la table `rol_per`
---
-ALTER TABLE `rol_per`
-  ADD CONSTRAINT `FK_ROL_PER_PERMISSIONS` FOREIGN KEY (`PER_CODE`) REFERENCES `permissions` (`PER_CODE`),
-  ADD CONSTRAINT `FK_ROL_PER_ROLE` FOREIGN KEY (`ROL_CODE`) REFERENCES `role` (`ROL_CODE`);
 
 --
 -- Contraintes pour la table `typ_ven`

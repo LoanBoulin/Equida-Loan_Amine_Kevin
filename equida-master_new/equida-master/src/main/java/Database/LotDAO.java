@@ -50,4 +50,7 @@ public class LotDAO {
         }
         return lesLots ;    
     } 
+    
+    
+    
 }

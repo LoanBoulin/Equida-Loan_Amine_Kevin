@@ -8,6 +8,7 @@ package servlet;
 import Database.CategVenteDAO;
 import Database.ChevalDAO;
 import Database.ClientDAO;
+import Database.EnchereDAO;
 import Database.PaysDAO;
 import Database.TypeChevalDAO;
 import forms.FormCheval;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.CategVente;
 import model.Cheval;
 import model.Client;
+import model.Enchere;
 import model.Pays;
 import model.TypeCheval;
 
@@ -89,8 +91,12 @@ public class ServletCheval extends HttpServlet {
             
             //Récupération du Cheval
             Cheval leCheval = ChevalDAO.getChevalById(connection, Integer.parseInt(venId));  
-                
-            //Mise en paramètres de l'objet cheval
+            
+            //Récupération de 7 dernières enchères
+            ArrayList<Enchere> lesEncheres = EnchereDAO.getLesEncheresByChevalLimit5(connection, venId);
+           
+            //Mise en paramètres
+            request.setAttribute("plesEncheres", lesEncheres);
             request.setAttribute("pLeCheval", leCheval);
             
             getServletContext().getRequestDispatcher("/vues/cheval/detailCheval.jsp").forward(request, response);

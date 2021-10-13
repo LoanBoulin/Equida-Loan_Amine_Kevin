@@ -84,6 +84,7 @@ public class ChevalDAO {
     
     
     
+    
     public static Cheval getChevalById(Connection connection, int che_id){    
         
         Cheval leCheval = new Cheval();

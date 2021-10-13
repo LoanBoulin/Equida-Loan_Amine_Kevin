@@ -38,6 +38,10 @@
         <servlet-name>ServletCompte</servlet-name>
         <servlet-class>servlet.ServletCompte</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletEnchere</servlet-name>
+        <servlet-class>servlet.ServletEnchere</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/listerLesClientsParCategVente</url-pattern>
@@ -93,6 +97,10 @@
     <servlet-mapping>
         <servlet-name>ServletCompte</servlet-name>
         <url-pattern>/ServletCompte/deconnexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletEnchere</servlet-name>
+        <url-pattern>/ServletEnchere/listerLesEncheresParCheval</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
