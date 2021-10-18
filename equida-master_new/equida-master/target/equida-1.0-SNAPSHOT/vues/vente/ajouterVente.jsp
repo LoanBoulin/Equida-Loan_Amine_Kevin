@@ -73,8 +73,8 @@
                 </div>
                     
                  <div class="form-group col-md-6">
-                <label for="pere">  Lieu :  </label>
-                <select name="LePere" class="form-control" >
+                <label for="lieu">  Lieu :  </label>
+                <select name="lieu" class="form-control" >
                     <%
                         for (int i=0; i<lesLieux.size();i++){
                             Lieu p = lesLieux.get(i);

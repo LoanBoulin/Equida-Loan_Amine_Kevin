@@ -57,7 +57,7 @@
                       + "</svg>"
                       + "<i class='bx bx-plus-circle'></i>"
                       + "</div>"
-                      + "<h4><a href=''>Ajouter une vente </a></h4>"
+                      + "<h4><a href='../ServletVente/ajouterVente'>Ajouter une vente </a></h4>"
                       + "<p>Ajouter une nouvelle vente aux enchères Equida. Vous pourrez y ajouter des chevaux ultérieurement.</p>"
                       + "</div>"
                       + "</div>");

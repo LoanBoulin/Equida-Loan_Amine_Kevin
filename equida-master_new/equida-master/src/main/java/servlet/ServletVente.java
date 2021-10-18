@@ -8,6 +8,7 @@ package servlet;
 import Database.CategVenteDAO;
 import Database.LieuDAO;
 import Database.VenteDAO;
+import forms.FormVente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -120,7 +121,35 @@ public class ServletVente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String url = request.getRequestURI();
+        if(url.equals("/equida/ServletVente/ajouterVente"))
+            {  
+        
+                /* Préparation de l'objet formulaire */
+                FormVente form = new FormVente();
+
+                /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+                Vente uneVente = form.ajouterVente(request);
+
+                /* Stockage du formulaire et de l'objet dans l'objet request */
+                request.setAttribute( "form", form );
+                request.setAttribute( "pVente", uneVente );
+
+                if (form.getErreurs().isEmpty()){
+                    // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+                    Vente venteInsere =  VenteDAO.ajouterVente(connection, uneVente);
+                    if (venteInsere != null ){
+                        response.sendRedirect("../ServletVente/venteDetail?venId="+venteInsere.getId());
+                    }
+                    else 
+                    {
+                        response.sendRedirect("../ServletAccueil/accueil?compte=0");
+                    }
+                }
+            }
+        
+        
     }
 
     /**

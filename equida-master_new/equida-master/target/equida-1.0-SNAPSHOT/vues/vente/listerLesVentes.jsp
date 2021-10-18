@@ -28,7 +28,6 @@
         <div class="row no-gutters">
             
              <% 
-        Compte leCompteAcc=(Compte)session.getAttribute("compte");
        
 
                 for(int i = 0; i < lesVentes.size();i++)
