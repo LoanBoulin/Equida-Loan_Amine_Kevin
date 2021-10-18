@@ -5,12 +5,15 @@
  */
 package Database;
 
+import static Database.VenteDAO.requete;
+import static Database.VenteDAO.rs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.CategVente;
+import model.Vente;
 import model.Lieu;
 import model.Vente;
 
@@ -99,4 +102,37 @@ public class VenteDAO {
         return laVente ;    
     }
     
+    
+     public static Vente ajouterVente(Connection connection , Vente unVente){
+       
+         
+        int idGenere = -1;
+        try 
+        {
+            
+            requete = connection.prepareStatement("INSERT INTO VENTE(CAT_CODE,LIE_ID,VEN_NOM,VEN_DATEDEBUTVENTE)\n"+
+                    "VALUES (?,?,?,?)" , requete.RETURN_GENERATED_KEYS);
+            requete.setString(1,unVente.getCategVente().getCode());
+            requete.setInt(2,unVente.getLeLieu().getId());
+            requete.setString(3,unVente.getNom());
+            requete.setString(4,unVente.getDateDebutVente());
+          
+            requete.executeUpdate();
+            
+            rs=requete.getGeneratedKeys();
+            while(rs.next() ){
+                idGenere=rs.getInt(1);
+                unVente.setId(idGenere);
+            }
+        }
+    
+        catch (SQLException e )
+        {
+                e.printStackTrace();
+        }
+            
+        return unVente;             
+     
+        }
+        
 }

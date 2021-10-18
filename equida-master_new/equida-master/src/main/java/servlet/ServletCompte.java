@@ -146,7 +146,8 @@ public class ServletCompte extends HttpServlet {
         {                   
             
             HttpSession session = request.getSession(true);
-            session.setAttribute("login", false);   
+            session.removeAttribute("login");
+            session.removeAttribute("compte");
             String redirectURL = "http://localhost:8080/equida/ServletCompte/connexion";
             response.sendRedirect(redirectURL);
         }

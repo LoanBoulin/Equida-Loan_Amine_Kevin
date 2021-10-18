@@ -5,6 +5,8 @@
  */
 package servlet;
 
+import Database.CategVenteDAO;
+import Database.LieuDAO;
 import Database.VenteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.CategVente;
+import model.Lieu;
 import model.Vente;
 
 /**
@@ -88,6 +92,18 @@ public class ServletVente extends HttpServlet {
             
             request.setAttribute("vente", laVente);
             getServletContext().getRequestDispatcher("/vues/vente/venteDetail.jsp").forward(request, response);
+      
+        }else
+            
+        if(url.equals("/equida/ServletVente/ajouterVente"))
+        {  
+            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieu(connection);
+            ArrayList<CategVente> lesCategs = CategVenteDAO.getLesCategVentes(connection);
+            
+            request.setAttribute("lieux", lesLieux);
+            request.setAttribute("categs", lesCategs);
+            
+            getServletContext().getRequestDispatcher("/vues/vente/ajouterVente.jsp").forward(request, response);
       
         }
         
