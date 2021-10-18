@@ -266,11 +266,10 @@ DROP TABLE IF EXISTS `enchere`;
 CREATE TABLE IF NOT EXISTS `enchere` (
   `ENC_NUMERO` int(2) NOT NULL AUTO_INCREMENT,
   `LOT_ID` int(2) NOT NULL,
-  `VEN_ID` int(2) NOT NULL,
   `CLI_ID` int(2) NOT NULL,
   `ENC_MONTANT` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`ENC_NUMERO`),
-  KEY `I_FK_ENCHERE_LOT` (`VEN_ID`,`LOT_ID`),
+  KEY `I_FK_ENCHERE_LOT` (`LOT_ID`),
   KEY `I_FK_ENCHERE_ACHETEUR` (`CLI_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
@@ -278,9 +277,9 @@ CREATE TABLE IF NOT EXISTS `enchere` (
 -- Déchargement des données de la table `enchere`
 --
 
-INSERT INTO `enchere` (`ENC_NUMERO`, `LOT_ID`, `VEN_ID`, `CLI_ID`, `ENC_MONTANT`) VALUES
-(1, 1, 90217, 1, '2459.00'),
-(2, 1, 90217, 3, '2789.00');
+INSERT INTO `enchere` (`ENC_NUMERO`, `LOT_ID`, `CLI_ID`, `ENC_MONTANT`) VALUES
+(1, 1, 1, '2459.00'),
+(2, 1, 3, '2789.00');
 
 -- --------------------------------------------------------
 
@@ -585,7 +584,7 @@ ALTER TABLE `cou_pie`
 --
 ALTER TABLE `enchere`
   ADD CONSTRAINT `FK_ENCHERE_ACHETEUR` FOREIGN KEY (`CLI_ID`) REFERENCES `acheteur` (`CLI_ID`),
-  ADD CONSTRAINT `FK_ENCHERE_LOT` FOREIGN KEY (`VEN_ID`,`LOT_ID`) REFERENCES `lot` (`VEN_ID`, `LOT_ID`);
+  ADD CONSTRAINT `FK_ENCHERE_LOT` FOREIGN KEY (`LOT_ID`) REFERENCES `lot` (`LOT_ID`);
 
 --
 -- Contraintes pour la table `lot`
