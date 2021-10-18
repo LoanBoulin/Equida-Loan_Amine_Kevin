@@ -73,6 +73,7 @@
         <ul>
           <li><a class="nav-link scrollto" href="/equida">Accueil</a></li>
           <li><a class="nav-link scrollto" href="../ServletVente/listerLesVentes">Ventes</a></li>
+          <li><a class="nav-link scrollto" href="../ServletCourse/listerLesCourses">Courses</a></li>
           
           <%
               if(session.getAttribute("login") != null){
