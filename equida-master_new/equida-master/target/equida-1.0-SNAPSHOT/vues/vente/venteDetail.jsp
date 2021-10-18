@@ -90,8 +90,9 @@
                 <br>
         
         <%    
-                
-             if(session.getAttribute("login").equals(true)){
+               
+            if(session.getAttribute("login") != null){
+                        if(session.getAttribute("login").equals(true)){
                             if(leCompteAcc.getLeRole() != null){
                                 if(leCompteAcc.getLeRole().getNom().equals("Salarie") || leCompteAcc.getLeRole().getNom().equals("Admin")){
 
@@ -108,6 +109,7 @@
                                 }
                             }
                         }
+            }
              
              %>
                 

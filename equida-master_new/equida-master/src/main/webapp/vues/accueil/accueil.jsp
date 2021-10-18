@@ -105,11 +105,12 @@
     
     
     <% 
-        Compte leCompteAcc=(Compte)session.getAttribute("compte");
         
-        if(session.getAttribute("login").equals(false)){ %>
+        
+        if(session.getAttribute("login") == null || session.getAttribute("login").equals(false)){ %>
             <%@ include file="../components/connexionBanner.jsp"%>
-       <% }else{ %>
+       <% }else{ 
+          Compte leCompteAcc=(Compte)session.getAttribute("compte");%>
        <% if(leCompteAcc.getLeRole() != null){ %>
             <%@ include file="../components/proDashboard.jsp"%>
        <% }else{ %>
