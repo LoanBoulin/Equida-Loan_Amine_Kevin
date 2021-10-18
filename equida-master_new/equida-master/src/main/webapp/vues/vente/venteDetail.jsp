@@ -90,19 +90,17 @@
                 <br>
         
         <%    
-                if(session.getAttribute("login") != null){
+               
+            if(session.getAttribute("login") != null){
                         if(session.getAttribute("login").equals(true)){
                             if(leCompteAcc.getLeRole() != null){
                                 if(leCompteAcc.getLeRole().getNom().equals("Salarie") || leCompteAcc.getLeRole().getNom().equals("Admin")){
-                                                                       
-                                    
-                                    out.println("<div class='form-group'><a class='button' href='../ServletLot/ajouterLot?vente=");  
-                                    out.println(laVente.getId());  
-                                    out.println("'>Ajouter un cheval</a></div><br>");      
-                    
+
                                     out.println("<div class='form-group'><a class='button' href='../ServletClient/listerLesClientsParCategVente?codeCat=");  
                                     out.println(laVente.getCategVente().getCode());  
                                     out.println("'>Voir les clients interessés</a></div><br>");  
+                                    
+                                    
                                     
                                     out.println("<div class='form-group'><a class='button' href='../ServletCourriel/listerLesCourrielsByVente?venId=");  
                                     out.println(laVente.getId());  
@@ -111,7 +109,7 @@
                                 }
                             }
                         }
-                }
+            }
              
              %>
                 

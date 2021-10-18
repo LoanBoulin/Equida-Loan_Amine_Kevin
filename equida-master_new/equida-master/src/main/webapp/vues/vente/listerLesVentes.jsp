@@ -4,6 +4,7 @@
     Author     : Zakina
 --%>
 
+<%@page import="model.CategVente"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Vente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,15 +12,11 @@
 <%@include file="../components/header.jsp" %>
   
   
-  
-  
   <%
      ArrayList<Vente> lesVentes = (ArrayList)request.getAttribute("pLesVentes");
+     ArrayList<CategVente> lesCategVente = (ArrayList)request.getAttribute("pLesCategVente");
   %>
-  
-  
-  
-  
+ 
   
   <!-- ======= Encheres Section ======= -->
     <section id="why-us" class="why-us">
@@ -28,6 +25,7 @@
         <div class="row no-gutters">
             
              <% 
+                                                                                                             
        
 
                 for(int i = 0; i < lesVentes.size();i++)
@@ -50,6 +48,18 @@
                         out.println("</div></div>");
                        
              }
+                
+                Compte leCompte=(Compte)session.getAttribute("compte");      
+                if(leCompte != null){
+                    if(leCompte.getLeClient() != null){
+                        out.println("<div class='col-lg-4 col-md-6 content-item'><div class='divEnchere'><span>");
+                        out.println("<a href='../ServletVente/listerCategVente");
+                            out.println();
+                        out.println("'>Voir les différentes catégories de vente</a>");                       
+                    }
+                }
+
+                                        
              %>
 
           

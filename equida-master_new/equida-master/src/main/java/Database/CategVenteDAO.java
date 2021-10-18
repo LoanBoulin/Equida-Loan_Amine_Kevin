@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.CategVente;
+import model.Client;
 
 /**
  *
@@ -46,5 +47,25 @@ public class CategVenteDAO {
         }
         return lesCategVentes ;    
     } 
+     
+     public static CategVente abonnerToCategVenteByClientId(Connection connection, CategVente uneCategVente){
+        int idGenere = -1;
+        try
+        {
+        //preparation de la requete
+            // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
+            // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
+            // supprimer ce paramètre en cas de requête sans auto_increment.
+            requete=connection.prepareStatement("INSERT INTO ACH_CAT ( CLI_ID, CAT_CODE)\n" +
+                    "VALUES (?,?)", requete.RETURN_GENERATED_KEYS);
+            requete.setString(1, uneCategVente.getCode());
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return uneCategVente;    
+    }
     
 }
