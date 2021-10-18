@@ -97,6 +97,9 @@
                       //Deconnexion
                       out.println("<li><a class='nav-link' href='../ServletCompte/deconnexion'>Deconnexion</a></li>");
                     }else{
+                      //Re-Destruction des attributs 
+                      session.removeAttribute("login");
+                      session.removeAttribute("compte");
                       out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
                     }
               }else{
