@@ -75,26 +75,31 @@
           <li><a class="nav-link scrollto" href="../ServletVente/listerLesVentes">Ventes</a></li>
           
           <%
-              Object laVar = session.getAttribute("login");
-                                       
-              if(laVar.equals(true)){
-                  Compte leCompte=(Compte)session.getAttribute("compte");
-                out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/profil?comId=");
-                out.println(leCompte.getId());
-                out.println("'>");              
-                out.println(leCompte.getLogin());
-                out.println(" (");
-                if(leCompte.getLeClient() == null){
-                   out.println(leCompte.getLeRole().getNom());
-                }else if(leCompte.getLeRole() == null){
-                   out.println("Client"); 
-                }
-                out.println(") ");
-                out.println("</a></li>");
-                //Deconnexion
-                out.println("<li><a class='nav-link' href='../ServletCompte/deconnexion'>Deconnexion</a></li>");
+              if(session.getAttribute("login") != null){
+              
+                    Object laVar = session.getAttribute("login");
+
+                    if(laVar.equals(true)){
+                        Compte leCompte=(Compte)session.getAttribute("compte");
+                      out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/profil?comId=");
+                      out.println(leCompte.getId());
+                      out.println("'>");              
+                      out.println(leCompte.getLogin());
+                      out.println(" (");
+                      if(leCompte.getLeClient() == null){
+                         out.println(leCompte.getLeRole().getNom());
+                      }else if(leCompte.getLeRole() == null){
+                         out.println("Client"); 
+                      }
+                      out.println(") ");
+                      out.println("</a></li>");
+                      //Deconnexion
+                      out.println("<li><a class='nav-link' href='../ServletCompte/deconnexion'>Deconnexion</a></li>");
+                    }else{
+                      out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
+                    }
               }else{
-                out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
+                 out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
               }
           %>
         </ul>
