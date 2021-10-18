@@ -7,6 +7,9 @@ package servlet;
 
 import Database.ClientDAO;
 import Database.EnchereDAO;
+import Database.LotDAO;
+import Database.VenteDAO;
+import forms.FormEnchere;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -19,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Client;
 import model.Enchere;
+import model.Lot;
+import model.Vente;
 
 /**
  *
@@ -89,6 +94,23 @@ public class ServletEnchere extends HttpServlet {
             request.setAttribute("plesEncheres", lesEncheres);
             
             getServletContext().getRequestDispatcher("/vues/enchere/listerLesEncheresParCheval.jsp").forward(request, response);
+        }else
+            
+        if(url.equals("/equida/ServletEnchere/ajouterEnchere"))
+        {                   
+
+            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+            request.setAttribute("pLesVentes", lesVentes);
+
+            String idClient = (String)request.getParameter("client");
+            String idLot = (String)request.getParameter("lot");
+            String nomCheval = (String)request.getParameter("chevalNom");
+            
+            request.setAttribute("leClient", idClient);
+            request.setAttribute("leLot", idLot);
+            request.setAttribute("leCheval", nomCheval);
+            
+            this.getServletContext().getRequestDispatcher("/vues/enchere/ajouterEnchere.jsp" ).forward( request, response );
         }
         
         
@@ -106,8 +128,47 @@ public class ServletEnchere extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+    
+    
+        /* Préparation de l'objet formulaire */
+        FormEnchere form = new FormEnchere();
+		
+        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+        Enchere uneEnchere = form.ajouterEnchere(request);
+        
+        /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute( "form", form );
+        request.setAttribute( "pEnchere", uneEnchere );
+		
+        if (form.getErreurs().isEmpty()){
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+            Enchere enchereInsere =  EnchereDAO.ajouterEnchere(connection, uneEnchere);
+            if (enchereInsere != null ){
+                String redirectURL = "http://localhost:8080/equida/index.jsp" ;
+                response.sendRedirect(redirectURL);
+            }
+            else 
+            {
+                // Cas oùl'insertion en bdd a échoué
+                //renvoyer vers une page d'erreur 
+            }
+        }
+        else
+        { 
+         
+            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+            request.setAttribute("pLesVentes", lesVentes);
+
+            String idClient = (String)request.getParameter("client");
+            String idLot = (String)request.getParameter("lot");
+            
+            request.setAttribute("leClient", idClient);
+            request.setAttribute("leLot", idLot);
+            
+            this.getServletContext().getRequestDispatcher("/vues/enchere/ajouterEncherae.jsp" ).forward( request, response );
+        }
     }
+    
 
     /**
      * Returns a short description of the servlet.

@@ -99,8 +99,22 @@
                                         out.println("</h4><p>");
                                         out.println(unLot.getLeCheval().getLeType().getLibelle());
                                         out.println("</p><h5 style='color: white'>");
-                                        out.println(unLot.getPrix());
-                            out.println("€</h5>");
+                                        out.println(unLot.getPrix());    
+                                        out.println("€</h5>");
+                                        
+                                        Compte leCompte=(Compte)session.getAttribute("compte");
+                                        if(leCompte != null){
+                                            if(leCompte.getLeClient() != null){
+                                                out.println("<a href='../ServletEnchere/ajouterEnchere?lot=");
+                                                out.println(unLot.getId());
+                                                out.println("&client=");
+                                                out.println(leCompte.getLeClient().getId());
+                                                out.println("&chevalNom=");
+                                                out.println(unLot.getLeCheval().getNom());
+                                                out.println("'>Enchérir</a>");
+                                            }
+                                        }
+                                        
                             
                             
                             

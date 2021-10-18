@@ -37,7 +37,7 @@ public class EnchereDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from CHEVAL INNER JOIN TYPECHEVAL on TYPECHEVAL.TYP_ID = CHEVAL.TYP_ID INNER JOIN LOT on CHEVAL.CHE_ID = LOT.CHE_ID INNER JOIN ENCHERE on LOT.LOT_ID = ENCHERE.LOT_ID INNER JOIN CLIENT on ENCHERE.CLI_ID = CLIENT.CLI_ID INNER JOIN PAYS on CLIENT.CODE = PAYS.CODE INNER JOIN VENTE on ENCHERE.VEN_ID = VENTE.VEN_ID INNER JOIN CATEGVENTE on VENTE.CAT_CODE = CATEGVENTE.CAT_CODE WHERE CHEVAL.CHE_ID = ? ORDER BY ENCHERE.ENC_NUMERO DESC;");
+            requete=connection.prepareStatement("select * from CHEVAL INNER JOIN TYPECHEVAL on TYPECHEVAL.TYP_ID = CHEVAL.TYP_ID INNER JOIN LOT on CHEVAL.CHE_ID = LOT.CHE_ID INNER JOIN ENCHERE on LOT.LOT_ID = ENCHERE.LOT_ID INNER JOIN CLIENT on ENCHERE.CLI_ID = CLIENT.CLI_ID INNER JOIN PAYS on CLIENT.CODE = PAYS.CODE INNER JOIN VENTE on LOT.VEN_ID = VENTE.VEN_ID INNER JOIN CATEGVENTE on VENTE.CAT_CODE = CATEGVENTE.CAT_CODE WHERE CHEVAL.CHE_ID = ? ORDER BY ENCHERE.ENC_NUMERO DESC;");
             requete.setInt(1, Integer.parseInt(venId));
             //executer la requete
             rs=requete.executeQuery();
@@ -93,6 +93,7 @@ public class EnchereDAO {
                 Lot leLot = new Lot();
                 leLot.setId(rs.getInt("lot_id"));
                 leLot.setPrix(rs.getInt("lot_prixdepart"));
+                leLot.setLaVente(laVente);
                 leLot.setLeCheval(leCheval);
                 leLot.setLaVente(laVente);
                                              
@@ -101,7 +102,6 @@ public class EnchereDAO {
                 Enchere uneEnchere = new Enchere();
                 uneEnchere.setMontant(rs.getFloat("ENC_MONTANT"));
                 uneEnchere.setId(rs.getInt("ENC_NUMERO"));
-                uneEnchere.setLaVente(laVente);
                 uneEnchere.setLeClient(unClient);
                 uneEnchere.setLeLot(leLot);
                                 
@@ -123,7 +123,7 @@ public class EnchereDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from CHEVAL INNER JOIN TYPECHEVAL on TYPECHEVAL.TYP_ID = CHEVAL.TYP_ID INNER JOIN LOT on CHEVAL.CHE_ID = LOT.CHE_ID INNER JOIN ENCHERE on LOT.LOT_ID = ENCHERE.LOT_ID INNER JOIN CLIENT on ENCHERE.CLI_ID = CLIENT.CLI_ID INNER JOIN PAYS on CLIENT.CODE = PAYS.CODE INNER JOIN VENTE on ENCHERE.VEN_ID = VENTE.VEN_ID INNER JOIN CATEGVENTE on VENTE.CAT_CODE = CATEGVENTE.CAT_CODE WHERE CHEVAL.CHE_ID = ? ORDER BY ENCHERE.ENC_NUMERO DESC LIMIT 5;");
+            requete=connection.prepareStatement("select * from CHEVAL INNER JOIN TYPECHEVAL on TYPECHEVAL.TYP_ID = CHEVAL.TYP_ID INNER JOIN LOT on CHEVAL.CHE_ID = LOT.CHE_ID INNER JOIN ENCHERE on LOT.LOT_ID = ENCHERE.LOT_ID INNER JOIN CLIENT on ENCHERE.CLI_ID = CLIENT.CLI_ID INNER JOIN PAYS on CLIENT.CODE = PAYS.CODE INNER JOIN VENTE on LOT.VEN_ID = VENTE.VEN_ID INNER JOIN CATEGVENTE on VENTE.CAT_CODE = CATEGVENTE.CAT_CODE WHERE CHEVAL.CHE_ID = ? ORDER BY ENCHERE.ENC_NUMERO DESC LIMIT 5;");
             requete.setInt(1, Integer.parseInt(venId));
             //executer la requete
             rs=requete.executeQuery();
@@ -179,6 +179,7 @@ public class EnchereDAO {
                 Lot leLot = new Lot();
                 leLot.setId(rs.getInt("lot_id"));
                 leLot.setPrix(rs.getInt("lot_prixdepart"));
+                leLot.setLaVente(laVente);
                 leLot.setLeCheval(leCheval);
                 leLot.setLaVente(laVente);
                                              
@@ -187,7 +188,6 @@ public class EnchereDAO {
                 Enchere uneEnchere = new Enchere();
                 uneEnchere.setMontant(rs.getFloat("ENC_MONTANT"));
                 uneEnchere.setId(rs.getInt("ENC_NUMERO"));
-                uneEnchere.setLaVente(laVente);
                 uneEnchere.setLeClient(unClient);
                 uneEnchere.setLeLot(leLot);
                                 
@@ -261,5 +261,48 @@ public class EnchereDAO {
         }
         return lesEncheres ;    
     } 
+    
+    
+    public static Enchere ajouterEnchere(Connection connection, Enchere uneEnchere){      
+        int idGenere = -1;
+        try
+        {
+            //preparation de la requete
+            // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
+            // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
+            // supprimer ce paramètre en cas de requête sans auto_increment.
+            requete=connection.prepareStatement("INSERT INTO ENCHERE (LOT_ID, CLI_ID, ENC_MONTANT)\n" +
+                    "VALUES (?,?,?)");
+            requete.setInt(1, uneEnchere.getLeLot().getId());
+            requete.setInt(2, uneEnchere.getLeClient().getId());      
+            requete.setFloat(3, uneEnchere.getMontant());
+            
+           /* Exécution de la requête */
+            requete.executeUpdate();
+            
+            // Récupération de id auto-généré par la bdd dans la table client
+            /*rs = requete.getGeneratedKeys();
+            while ( rs.next() ) {
+                idGenere = rs.getInt( 1 );
+                uneEnchere.setId(idGenere);
+            }*/
+            
+            /* ajout des enregistrement dans la table clientenchere
+            for (int i=0;i<uneEnchere.getLeClient().size();i++){
+                PreparedStatement requete2=connection.prepareStatement("INSERT INTO clientenchere (numeroEnchere, codeClient)\n" +
+                    "VALUES (?,?)");
+                 requete2.setInt(1, uneEnchere.getId());
+                 requete2.setString(2, uneEnchere.().get(i).getNom());
+                 requete2.executeUpdate();
+            }*/
+            
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return uneEnchere ;    
+    }
     
 }

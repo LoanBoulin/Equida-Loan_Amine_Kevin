@@ -163,8 +163,8 @@
                         out.println(uneEnchere.getMontant());
                         out.println("€</td>");
 
-                        out.println("<td><a href ='../ServletVente/venteDetail?venId="+ uneEnchere.getLaVente().getId()+ "'>");
-                        out.println(uneEnchere.getLaVente().getNom());
+                        out.println("<td><a href ='../ServletVente/venteDetail?venId="+ uneEnchere.getLeLot().getLaVente().getId()+ "'>");
+                        out.println(uneEnchere.getLeLot().getLaVente().getNom());
                         out.println("</a></td>");
                                               
                                

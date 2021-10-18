@@ -120,7 +120,9 @@ public class ServletClient extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            /* Préparation de l'objet formulaire */
+       
+        
+        /* Préparation de l'objet formulaire */
         FormClient form = new FormClient();
 		
         /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
