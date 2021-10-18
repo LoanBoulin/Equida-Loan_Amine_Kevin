@@ -148,13 +148,20 @@ public class ChevalDAO {
             requete.setString(3,unCheval.getSire());
             requete.setString(4,unCheval.getDateNaissance());
             requete.setString(5,unCheval.getNomImage());
-            requete.setInt(6,unCheval.getLePere().getId());
-            requete.setInt(7,unCheval.getLaMere().getId());
+            if(unCheval.getLePere() != null){
+               requete.setInt(6,unCheval.getLePere().getId()); 
+            }else{
+               requete.setString(6,null);
+            }
+            
+            if(unCheval.getLaMere() != null){
+               requete.setInt(7,unCheval.getLaMere().getId()); 
+            }else{
+               requete.setString(7,null); 
+            }
+            
             requete.setInt(8,unCheval.getLeType().getId());
-          
-            
-         
-            
+
             
             requete.executeUpdate();
             
