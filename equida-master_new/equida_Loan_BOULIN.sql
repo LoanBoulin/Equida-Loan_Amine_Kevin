@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 13 oct. 2021 à 09:38
+-- Généré le : lun. 18 oct. 2021 à 11:57
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `cheval` (
   KEY `I_FK_CHEVAL_TYPECHEVAL` (`TYP_ID`),
   KEY `FK_CHEVAL_IDPERE` (`CHE_IDPERE`),
   KEY `FK_CHEVAL_IDMERE` (`CHE_IDMERE`)
-) ENGINE=InnoDB AUTO_INCREMENT=956 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=958 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `cheval`
@@ -127,8 +127,7 @@ INSERT INTO `cheval` (`CHE_ID`, `TYP_ID`, `CHE_NOM`, `CHE_SEXE`, `CHE_SIRE`, `CH
 (742, 6, 'Dior', 'F', '54 325 346 G', '20-02-2015', 'dior.jpg', NULL, 943),
 (865, 3, 'Mambo', 'M', '65 352 604 F', '15-09-2016', NULL, 954, NULL),
 (943, 4, 'Suzanna', 'F', '75 655 983 J', '22-01-2011', NULL, NULL, NULL),
-(954, 2, 'Pepito', 'M', '85 425 092 N', '03-06-2005', NULL, NULL, NULL),
-(955, 1, 'aa', 'a', 'aaaa', 'aaaa', NULL, 943, 742);
+(954, 2, 'Pepito', 'M', '85 425 092 N', '03-06-2005', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +230,20 @@ CREATE TABLE IF NOT EXISTS `course` (
   `COU_LIEU` char(50) DEFAULT NULL,
   `COU_DATE` char(32) DEFAULT NULL,
   PRIMARY KEY (`COU_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `course`
+--
+
+INSERT INTO `course` (`COU_ID`, `COU_NOM`, `COU_LIEU`, `COU_DATE`) VALUES
+(1, 'Course du grand Lac', 'Toulouse', '22-10-2021'),
+(2, 'Horse Brazil Race', 'Châteauroux', '22-12-2021'),
+(3, 'Golder Hour Race', 'Paris', '01-01-2022'),
+(4, 'La dernière des courses', ' Créteil', '05-02-2022'),
+(5, 'Le ploton de l\'or', 'Saint Sebastien', '03-11-2022'),
+(6, 'Le tour de Monaco', 'Monaco', '15-06-2022'),
+(7, 'La course des millénaires', 'Louvigny', '25-07-2021');
 
 -- --------------------------------------------------------
 
@@ -271,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `enchere` (
   PRIMARY KEY (`ENC_NUMERO`),
   KEY `I_FK_ENCHERE_LOT` (`LOT_ID`),
   KEY `I_FK_ENCHERE_ACHETEUR` (`CLI_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `enchere`
@@ -279,7 +291,10 @@ CREATE TABLE IF NOT EXISTS `enchere` (
 
 INSERT INTO `enchere` (`ENC_NUMERO`, `LOT_ID`, `CLI_ID`, `ENC_MONTANT`) VALUES
 (1, 1, 1, '2459.00'),
-(2, 1, 3, '2789.00');
+(2, 1, 3, '2789.00'),
+(3, 1, 1, '5000.00'),
+(4, 1, 1, '7500.00'),
+(5, 1, 1, '6500.00');
 
 -- --------------------------------------------------------
 
