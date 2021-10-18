@@ -84,7 +84,6 @@ public class ChevalDAO {
     
     
     
-    
     public static Cheval getChevalById(Connection connection, int che_id){    
         
         Cheval leCheval = new Cheval();
@@ -214,7 +213,36 @@ public class ChevalDAO {
         }
         return lesChevaux ;    
     } 
-}
 
 
+    public static ArrayList<Cheval>  getLesChevauxBySexe (Connection connection, String sexe) {    
+        ArrayList<Cheval> lesChevaux = new ArrayList<Cheval>();
+        try
+        {
+            
+            requete = connection.prepareStatement("select * from cheval where che_sexe = ?");         
+            requete.setString(1,sexe);            
+            rs=requete.executeQuery();
+            
+          while ( rs.next() ) {  
+                Cheval unCheval = new Cheval();
+                
+                unCheval.setId(rs.getInt("che_id"));
+                unCheval.setNom(rs.getString("che_nom"));
+                unCheval.setSexe(rs.getString("che_sexe"));
+                unCheval.setDateNaissance(rs.getString("che_datenaissance"));
+                unCheval.setNomImage(rs.getString("che_nomimage"));           
+          
+                lesChevaux.add(unCheval);
+            } 
+        }
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return lesChevaux ;    
+    } 
+
+    }
 

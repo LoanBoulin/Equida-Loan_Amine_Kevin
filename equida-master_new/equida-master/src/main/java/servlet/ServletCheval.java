@@ -104,8 +104,10 @@ public class ServletCheval extends HttpServlet {
         } else  if(url.equals("/equida/ServletCheval/ajouterCheval")){
         
             ArrayList<TypeCheval> lesTypes = TypeChevalDAO.getTypesCheval(connection);
-            ArrayList<Cheval> lesChevaux = ChevalDAO.getLesChevaux(connection);
-            request.setAttribute("pLesChevaux", lesChevaux); 
+            ArrayList<Cheval> lesChevauxHomme = ChevalDAO.getLesChevauxBySexe(connection, "M");
+            ArrayList<Cheval> lesChevauxFemme = ChevalDAO.getLesChevauxBySexe(connection, "F");
+            request.setAttribute("pLesChevauxH", lesChevauxHomme); 
+            request.setAttribute("pLesChevauxF", lesChevauxFemme); 
             request.setAttribute("pLesTypes", lesTypes); 
             
         

@@ -144,6 +144,7 @@ public class CompteDAO {
                     unClient.setId(rs.getInt("cli_id"));
                     unClient.setNom(rs.getString("cli_nom"));
                     unClient.setPrenom(rs.getString("cli_prenom"));
+                    unClient.setTitre(rs.getString("cli_titre"));
                     unClient.setVille(rs.getString("cli_ville"));
                     unClient.setAdrRue(rs.getString("cli_rue"));
                     unClient.setCodePostal(rs.getString("cli_copos"));
@@ -171,6 +172,73 @@ public class CompteDAO {
                 
               
                 
+            }
+            
+                             
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            System.out.println("Erreur lors de l’établissement de la connexion");
+            return leCompte;
+        }
+        return leCompte ;    
+    }
+     
+     
+     public static Compte getCompte(Connection connection, String compteId){       
+         
+         Compte leCompte = new Compte();
+         
+        int idGenere = -1;
+        try
+        {        
+            // ajout du compte
+            requete=connection.prepareStatement("SELECT * FROM COMPTE LEFT JOIN CLIENT ON COMPTE.CLI_ID = CLIENT.CLI_ID INNER JOIN PAYS LEFT JOIN ROLE ON ROL_ID = ROL_CODE WHERE COMPTE.COM_ID = ? ");
+            requete.setInt(1, Integer.parseInt(compteId) );        
+            rs=requete.executeQuery();
+           
+            // Récupération de id auto-généré par la bdd dans la table client
+            while ( rs.next() ) {    
+                       
+                
+                leCompte.setId(rs.getInt("COMPTE.COM_ID"));
+                leCompte.setLogin(rs.getString("COMPTE.COM_LOGIN"));
+                
+                if(rs.getObject("COMPTE.ROL_ID") == null){
+                    
+                    System.out.println("CLIENT");
+                    
+                    Client unClient = new Client();
+                    unClient.setId(rs.getInt("cli_id"));
+                    unClient.setNom(rs.getString("cli_nom"));
+                    unClient.setPrenom(rs.getString("cli_prenom"));
+                    unClient.setTitre(rs.getString("cli_titre"));
+                    unClient.setVille(rs.getString("cli_ville"));
+                    unClient.setAdrRue(rs.getString("cli_rue"));
+                    unClient.setCodePostal(rs.getString("cli_copos"));
+                    unClient.setAdresseMessagerie(rs.getString("cli_adresseMessagerie"));
+                              
+                    Pays p = new Pays();
+                    p.setCode(rs.getString("PAYS.CODE"));
+                    p.setNom(rs.getString("PAYS.NOM"));
+
+                    unClient.setLePays(p);
+                    
+                    leCompte.setLeClient(unClient);
+                    
+                }else if(rs.getObject("COMPTE.CLI_ID") == null){
+                    
+                    System.out.println("ROLE");
+                    
+                    Role unRole = new Role();
+                    unRole.setCode(rs.getInt("ROL_CODE"));
+                    unRole.setNom(rs.getString("ROL_NOM"));
+                    
+                    leCompte.setLeRole(unRole);
+                    
+                }
+                                      
             }
             
                              

@@ -86,11 +86,27 @@ public class ServletCompte extends HttpServlet {
             throws ServletException, IOException{
             
              String url = request.getRequestURI();
-        // Récup et affichage par date décroissante de toutes les ventes    
-        if(url.equals("/equida/ServletCompte/connexion"))
+        // Récup et affichage par date décroissante 
+       
+         
+        if(url.equals("/equida/ServletCompte/profil"))
         {  
             
+            String comId = request.getParameter("comId");
+            Compte unCompte = CompteDAO.getCompte(connection, comId);
+            
+            request.setAttribute("pUnCompte" , unCompte);
+                     
+            getServletContext().getRequestDispatcher("/vues/compte/profil.jsp").forward(request, response);
+      
+        }else
+        
+        
+        if(url.equals("/equida/ServletCompte/connexion"))
+        {  
+           
             getServletContext().getRequestDispatcher("/vues/compte/connexion.jsp").forward(request, response);
+            
       
         }else
         if(url.equals("/equida/ServletClient/ajouterClient"))

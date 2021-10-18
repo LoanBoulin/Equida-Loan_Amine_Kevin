@@ -61,6 +61,7 @@ public class ServletAccueil extends HttpServlet {
         if(url.equals("/equida/ServletAccueil/accueil"))
         {  
             
+            //récupération d'insertion de compte
             String compteStatut = (String)request.getParameter("compte");            
             //Mise en paramètres
             request.setAttribute("pLeCompte", compteStatut);        

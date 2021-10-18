@@ -15,8 +15,8 @@
                 </svg>
                 <i class="bx bx-money"></i>
               </div>
-              <h4><a href="">Mes ventes</a></h4>
-              <p>Voir les derniers chevaux vendus lors des enchères d'Equida®</p>
+              <h4><a href="/equida/ServletCheval/ajouterCheval">Ajouter un cheval</a></h4>
+              <p>Le cheval mis en vente dois absolument remplir toutes les informations demandées Equida®</p>
             </div>
           </div>
 
@@ -41,7 +41,7 @@
                 </svg>
                 <i class="bx bx-wallet-alt"></i>
               </div>
-              <h4><a href="">Enchères</a></h4>
+              <h4><a href=""> Mes enchères</a></h4>
               <p>Voir les dernières enchères d'Equida® auxquelles j'ai participé ainsi que l'historique des offres </p>
             </div>
           </div>
