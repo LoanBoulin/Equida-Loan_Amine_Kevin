@@ -182,7 +182,7 @@ public class ChevalDAO {
         {
             
           //preparation de la requete     
-            requete=connection.prepareStatement("select * from cheval");
+            requete=connection.prepareStatement("select * from cheval INNER JOIN typecheval ON CHEVAL.TYP_ID = TYPECHEVAL.TYP_ID");
             
             //executer la requete
             rs=requete.executeQuery();
@@ -197,7 +197,8 @@ public class ChevalDAO {
                 unCheval.setDateNaissance(rs.getString("che_datenaissance"));
                 unCheval.setNomImage(rs.getString("che_nomimage"));
                 
-                unType.setId(rs.getInt("typ_id"));
+                unType.setId(rs.getInt("TYPECHEVAL.typ_id"));
+                unType.setLibelle(rs.getString("typ_libelle"));
                 
                 unCheval.setLeType(unType);
                 

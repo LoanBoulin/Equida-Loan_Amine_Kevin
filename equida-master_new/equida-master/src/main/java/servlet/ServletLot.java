@@ -17,8 +17,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Cheval;
 import model.Lot;
 import model.TypeCheval;
+import forms.FormLot;
 
 /**
  *
@@ -87,7 +89,6 @@ public class ServletLot extends HttpServlet {
             for(int i = 0; i < lesLots.size();i++)
                 {
                     Lot unLot = lesLots.get(i);
-                    
                     unLot.setLeCheval(ChevalDAO.getChevalByLotId(connection, unLot.getId() ));
                 }
             
@@ -99,7 +100,18 @@ public class ServletLot extends HttpServlet {
             request.setAttribute("pLesTypes", lesTypes);
             
             getServletContext().getRequestDispatcher("/vues/lot/listerLesLotsByVente.jsp").forward(request, response);
-      
+               
+        }else if(url.equals("/equida/ServletLot/ajouterLot")){
+             
+            String vente = (String)request.getParameter("vente");
+            
+            //Récupération des chevaux
+            ArrayList<Cheval> lesChevaux = ChevalDAO.getLesChevaux(connection);
+            //Mise en paramètres
+            request.setAttribute("pLesChevaux", lesChevaux);
+            request.setAttribute("vente", vente);
+            
+            getServletContext().getRequestDispatcher("/vues/lot/ajouterLot.jsp").forward(request, response);
         }
     }
 
@@ -114,7 +126,34 @@ public class ServletLot extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String url = request.getRequestURI();
+        if(url.equals("/equida/ServletLot/ajouterLot"))
+            {  
+        
+                /* Préparation de l'objet formulaire */
+                FormLot form = new FormLot();
+
+                /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+                Lot unLot = form.ajouterLot(request);
+
+                /* Stockage du formulaire et de l'objet dans l'objet request */
+                request.setAttribute( "form", form );
+                request.setAttribute( "pLot", unLot );
+
+                if (form.getErreurs().isEmpty()){
+                    // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+                    Lot lotInsere = LotDAO.ajouterLot(connection, unLot);
+                    if (lotInsere != null ){
+                        response.sendRedirect("../ServletLot/listerLesLotsByVente?venId="+lotInsere.getLaVente().getId());
+                    }
+                    else 
+                    {
+                        response.sendRedirect("../ServletAccueil/accueil?compte=0");
+                    }
+                }
+            }
+        
     }
 
     /**

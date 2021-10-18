@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
  <!-- ======= Footer ======= -->
-  <footer id="footer">
+  <footer id="footer" >
     <div class="container">
       <h3>Equida® </h3>
       <p>© 2021 – 2021</p>

@@ -79,6 +79,10 @@
         <url-pattern>/ServletLot/listerLesLotsByVente</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletLot</servlet-name>
+        <url-pattern>/ServletLot/ajouterLot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletCheval</servlet-name>
         <url-pattern>/ServletCheval/detailCheval</url-pattern>
     </servlet-mapping>

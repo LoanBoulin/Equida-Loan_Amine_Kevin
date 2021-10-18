@@ -50,4 +50,38 @@ public class LotDAO {
         }
         return lesLots ;    
     } 
+    
+    
+    
+ public static Lot ajouterLot(Connection connection , Lot unLot){
+       
+         
+        int idGenere = -1;
+        try 
+        {
+            
+            requete = connection.prepareStatement("INSERT INTO LOT(VEN_ID,CHE_ID,LOT_PRIXDEPART)\n"+
+                    "VALUES (?,?,?)" , requete.RETURN_GENERATED_KEYS);
+            requete.setInt(1,unLot.getLaVente().getId());
+            requete.setInt(2,unLot.getLeCheval().getId());
+            requete.setFloat(3,unLot.getPrix());
+          
+            requete.executeUpdate();
+            
+            rs=requete.getGeneratedKeys();
+            while(rs.next() ){
+                idGenere=rs.getInt(1);
+                unLot.setId(idGenere);
+            }
+        }
+    
+        catch (SQLException e )
+        {
+                e.printStackTrace();
+        }
+            
+        return unLot;             
+     
+        }
+ 
 }
