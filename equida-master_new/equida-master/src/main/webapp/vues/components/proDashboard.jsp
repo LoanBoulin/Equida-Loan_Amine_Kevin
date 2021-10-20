@@ -48,7 +48,7 @@
             }
             
 
-            if(leComptePRO.getLeRole().getNom().equals("Salarie")){
+            if(leComptePRO.getLeRole().getNom().equals("Salarie") || leComptePRO.getLeRole().getNom().equals("Admin")){
               out.println("<div class='col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0' data-aos='zoom-in' data-aos-delay='200'>"
                       + "<div class='icon-box iconbox-pink'>"
                       + " <div class='icon'>"

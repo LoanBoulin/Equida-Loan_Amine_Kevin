@@ -6,7 +6,9 @@
 package servlet;
 
 import Database.CategVenteDAO;
+import Database.LieuDAO;
 import Database.VenteDAO;
+import forms.FormVente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.CategVente;
+import model.Lieu;
 import model.Vente;
 
 /**
@@ -99,8 +102,19 @@ public class ServletVente extends HttpServlet {
             request.setAttribute("pLesCategVente", lesCategVente);
             
             this.getServletContext().getRequestDispatcher("/vues/vente/listerCategVente.jsp").forward(request, response);
-        }
+        }else
         
+         if(url.equals("/equida/ServletVente/ajouterVente"))
+        {  
+            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieu(connection);
+            ArrayList<CategVente> lesCategs = CategVenteDAO.getLesCategVentes(connection);
+            
+            request.setAttribute("lieux", lesLieux);
+            request.setAttribute("categs", lesCategs);
+            
+            getServletContext().getRequestDispatcher("/vues/vente/ajouterVente.jsp").forward(request, response);
+      
+        }
     }
 
     /**
@@ -114,7 +128,39 @@ public class ServletVente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+             /* Préparation de l'objet formulaire */
+       
+             FormVente form = new FormVente();
+		
+        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+        Vente uneVente = form.ajouterVente(request);
+        
+        /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute( "form", form );
+        request.setAttribute( "pVente", uneVente );
+		
+        if (form.getErreurs().isEmpty()){
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos 
+            Vente venteInsere =  VenteDAO.ajouterVente(connection, uneVente);
+            if (venteInsere != null ){
+                                           
+                    String redirectURL = "../ServletVente/venteDetail?venId=" + venteInsere.getId();
+                    response.sendRedirect(redirectURL);
+            }
+            else 
+            {
+                // Cas oùl'insertion en bdd a échoué
+                //renvoyer vers une page d'erreur 
+            }
+        }
+        else
+        { 
+		// il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+            request.setAttribute("pVente", uneVente);
+            getServletContext().getRequestDispatcher("/vues/vente/ajouterVente.jsp").forward(request, response);
+            
+           
+        }
     }
 
     /**

@@ -4,6 +4,7 @@
     Author     : adminsio
 --%>
 
+<%@page import="model.Vente"%>
 <%@page import="model.Lieu"%>
 <%@page import="model.CategVente"%>
 <%@page import="forms.FormVente"%>
@@ -20,12 +21,10 @@
           <p>Veuillez ajouter les informations concernant votre Vente et appuyer sur le bouton "Valider" pour confirmer votre saisie.</p>
         </div>
 
-
-
           <div class="col-lg-5 d-flex align-items-stretch" style="padding: 30px; width: 100%; ">
         
          <%
-                //Client client=(Client)request.getAttribute("client");
+                Vente vente=(Vente)request.getAttribute("pVente");
                 FormVente form = (FormVente)request.getAttribute("form");
             %>
         
