@@ -59,7 +59,7 @@
                  
                 <div class="form-group col-md-6">
                 <label for="dateNaissance">DATE DE NAISSANCE : </label>
-                <input id="dateNaissance"  type="text"  name="dateNaissance"  class="form-control" size="30" maxlength="30">      
+                <input id="dateNaissance"  type="date"  name="dateNaissance"  class="form-control" size="30" maxlength="30">      
                 </br>
                 </div>
             </div>    
@@ -78,6 +78,7 @@
                         <div class="form-group col-md-6">
                 <label for="mere">MERE DU CHEVAL :  </label>
                 <select name="LaMere" class="form-control" >
+                    <option default selected value> -- Choisir -- </option>
                     
                     <%
                         for (int i=0; i<lesChevauxF.size();i++){
@@ -93,6 +94,7 @@
                  <div class="form-group col-md-6">
                 <label for="pere">  PERE DU CHEVAL :  </label>
                 <select name="LePere" class="form-control" >
+                    <option selected value> -- Choisir -- </option>
                     <%
                         for (int i=0; i<lesChevauxH.size();i++){
                             Cheval p = lesChevauxH.get(i);

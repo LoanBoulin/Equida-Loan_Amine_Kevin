@@ -81,12 +81,17 @@ public class FormCheval {
             resultat = "Échec de l'ajout.";
         }
          
+        if(pere != null){
+            Cheval chepere = new Cheval();
+            chepere.setId(Integer.parseInt(pere));
+            unCheval.setLePere(chepere);
+        }
         
-        Cheval chepere = new Cheval();
-        chepere.setId(Integer.parseInt(pere));
-        
-        Cheval chemere = new Cheval();
-        chemere.setId(Integer.parseInt(mere));
+        if(mere != null){
+            Cheval chemere = new Cheval();
+            chemere.setId(Integer.parseInt(mere));
+            unCheval.setLaMere(chemere);
+        }
         
         TypeCheval chetyp = new TypeCheval();
         chetyp.setId(Integer.parseInt(typid));
@@ -96,9 +101,7 @@ public class FormCheval {
         unCheval.setSexe(sexe);
         unCheval.setSire(sire);
         unCheval.setDateNaissance(dateNaissance);
-        unCheval.setNomImage(nomImage);
-        unCheval.setLePere(chepere);
-        unCheval.setLaMere(chemere);
+        unCheval.setNomImage(nomImage);      
         unCheval.setLeType(chetyp);
         
         
