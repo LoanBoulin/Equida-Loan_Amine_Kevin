@@ -16,3 +16,17 @@ COMPTE SALARIE :
 joris/mpjojo
 
 PS : en cas d'erreur majeure empéchant l'accès à toutes les pages. Supprimer les variables de session depuis le navigateur.
+
+
+UserStories restantes 
+- En tant que salarié
+- En tant qu'Admin
+- En tant que Client
+
+EN COURS
+- En tant que Client, je peux m'inscrire à un type de vente 
+
+A FAIRE 
+- Je peux voir le classement des courses
+- En tant que salarié je peux modifier une vente
+- En tant que salarié je peux supprimer une vente
