@@ -31,7 +31,7 @@
                             + "</h2>");
                 %>
           <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="../ServletAccueil/accueil">Home</a></li>
             <li>Détails Cheval</li>
             
           </ol>
