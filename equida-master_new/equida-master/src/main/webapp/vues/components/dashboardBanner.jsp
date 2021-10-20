@@ -1,4 +1,11 @@
+<%@page import="model.Compte"%>
 <!-- ======= Connected User Ventes&Achats ======= -->
+
+<%
+    //Récupération du compte
+    Compte leCompteAccc=(Compte)session.getAttribute("compte");
+%>
+
     <section id="services" class="services">
       <div class="container">
 
@@ -41,7 +48,9 @@
                 </svg>
                 <i class="bx bx-wallet-alt"></i>
               </div>
-              <h4><a href=""> Mes enchères</a></h4>
+              <h4>
+                  <% out.println("<a href='../ServletEnchere/listerLesEncheresParClient?client=" + leCompteAccc.getLeClient().getId() + "'+> Mes enchères</a>"); %>
+              </h4>
               <p>Voir les dernières offres formulées lors des enchères Equida® auxquelles j'ai participé.</p>
             </div>
           </div>

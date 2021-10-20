@@ -118,6 +118,10 @@
         <servlet-name>ServletEnchere</servlet-name>
         <url-pattern>/ServletEnchere/ajouterEnchere</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletEnchere</servlet-name>
+        <url-pattern>/ServletEnchere/listerLesEncheresParClient</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60

@@ -20,7 +20,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Client;
+import model.Compte;
 import model.Enchere;
 import model.Lot;
 import model.Vente;
@@ -87,13 +89,21 @@ public class ServletEnchere extends HttpServlet {
         if(url.equals("/equida/ServletEnchere/listerLesEncheresParCheval"))
         {  
             String codeChe = (String)request.getParameter("codeChe");
-            
-            System.out.println(codeChe);
                   
             ArrayList<Enchere> lesEncheres = EnchereDAO.getLesEncheresByCheval(connection, codeChe);
             request.setAttribute("plesEncheres", lesEncheres);
             
             getServletContext().getRequestDispatcher("/vues/enchere/listerLesEncheresParCheval.jsp").forward(request, response);
+        }else
+            
+        if(url.equals("/equida/ServletEnchere/listerLesEncheresParClient"))
+        {  
+            String codeCompte = (String)request.getParameter("client");
+                 
+            ArrayList<Enchere> lesEncheres = EnchereDAO.getLesEncheresByUser(connection, codeCompte);
+            request.setAttribute("plesEncheres", lesEncheres);
+            
+            getServletContext().getRequestDispatcher("/vues/enchere/listerLesEncheresParClient.jsp").forward(request, response);
         }else
             
         if(url.equals("/equida/ServletEnchere/ajouterEnchere"))
