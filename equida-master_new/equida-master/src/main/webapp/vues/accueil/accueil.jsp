@@ -65,9 +65,9 @@
         <div class="carousel-item" style="background-image: url(../assets/img/slide/slide-2.jpg)">
           <div class="carousel-container">
             <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">L'activité annuelle</h2>
-              <p class="animate__animated animate__fadeInUp">Nous mettons à disposition un calendrier annuel. Il vous indique chaque vente programmée en mentionnant le lieu, la catégorie de la vente et les types de chevaux concernés.</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Plus d'informations</a>
+              <h2 class="animate__animated animate__fadeInDown">Des enchères exceptionnelles</h2>
+              <p class="animate__animated animate__fadeInUp">Nous insistons sur la qualité de nos propositions pour vous assurer le meilleur service possible. N'hésitez pas à sélectionner vos préférences pour acquérir LE cheval qui vous correspond.</p>
+              <a href="../ServletVente/listerLesVentes" class="btn-get-started animate__animated animate__fadeInUp scrollto">Plus d'informations</a>
             </div>
           </div>
         </div>
@@ -76,9 +76,9 @@
         <div class="carousel-item" style="background-image: url(../assets/img/slide/slide-3.jpg)">
           <div class="carousel-container">
             <div class="container">
-              <h2 class="animate__animated animate__fadeInDown">Des enchères exceptionnelles</h2>
-              <p class="animate__animated animate__fadeInUp">Nous insistons sur la qualité de nos propositions pour vous assurer le meilleur service possible. N'hésitez pas à sélectionner vos préférences pour acquérir LE cheval qui vous correspond.</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Plus d'informations</a>
+              <h2 class="animate__animated animate__fadeInDown">Des courses passionnantes</h2>
+              <p class="animate__animated animate__fadeInUp">Equida vous propose également de consulter les résultats des courses récentes. Nous faisons notre possible pour vous aider à choisir le meilleur cheval possible.</p>
+              <a href="../ServletCourse/listerLesCourses" class="btn-get-started animate__animated animate__fadeInUp scrollto">Plus d'informations</a>
             </div>
           </div>
         </div>
