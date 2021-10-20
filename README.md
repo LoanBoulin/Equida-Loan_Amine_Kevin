@@ -17,12 +17,6 @@ joris/mpjojo
 
 PS : en cas d'erreur majeure empéchant l'accès à toutes les pages. Supprimer les variables de session depuis le navigateur.
 
-
-UserStories restantes 
-- En tant que salarié
-- En tant qu'Admin
-- En tant que Client
-
 EN COURS
 - En tant que Client, je peux m'inscrire à un type de vente 
 
