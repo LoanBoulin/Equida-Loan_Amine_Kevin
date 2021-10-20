@@ -121,28 +121,30 @@
               </ul>
             </div>
               
+              <% 
+                    ArrayList<Enchere> lesEncheres = (ArrayList)request.getAttribute("plesEncheres");
               
-            <div class="portfolio-description">
-                <div class="row">
-                    <h2 class="col-8">Enchères récentes</h2>
-                    <% out.println("<a class='col-3' href ='../ServletEnchere/listerLesEncheresParCheval?codeChe="+ leCheval.getId()+ "'>Voir plus</a>"); %>
-                </div>
-             <table  class="table table-bordered table-striped table-condensed">  
-            <thead>
-                <tr>             
-                    <th>Id</th>
-                    <th>Client</th>
-                    <th>Prix base</th>
-                    <th>Montant</th>
-                    <th>Vente</th>                   
-
-                </tr>
-            </thead>
-            <tbody>
-              
-                    <%
-                          ArrayList<Enchere> lesEncheres = (ArrayList)request.getAttribute("plesEncheres");
+                    if(lesEncheres.isEmpty() == false){
                         
+                        out.println(" <div class='portfolio-description'>"
+                                + "<div class='row'>"
+                                + "<h2 class='col-8'>Enchères récentes</h2>"
+                                + "<a class='col-3' href ='../ServletEnchere/listerLesEncheresParCheval?codeChe=");
+                        out.println(leCheval.getId());
+                        out.println("'>Voir plus</a>"
+                                + "</div>"
+                                + "<table class='table table-bordered table-striped table-condensed'>"
+                                + "<thead>"
+                                + "<tr>"
+                                + "<th>Id</th>"
+                                + " <th>Client</th>"
+                                + "<th>Prix base</th>"
+                                + "<th>Montant</th>"
+                                + "<th>Vente</th>"
+                                + "</tr>"
+                                + "</thead>"
+                                + "<tbody>");
+                   
                     for(int i = 0; i < lesEncheres.size();i++)
                     {
                         Enchere uneEnchere = lesEncheres.get(i);
@@ -169,11 +171,18 @@
                                               
                                
                     }
+                    
+                    out.println(" </tbody>"
+                            + "</table>");
+                    
+                    }else{
+                        out.println("<div class='portfolio-info'>"
+                                + "<h3 class='col-8'>Pas d'enchères</h3>"
+                                + "</div>");
+                    }
                     %>
-           
-            </tbody>
-        </table>
-            </div>
+
+            
           </div>
               
            

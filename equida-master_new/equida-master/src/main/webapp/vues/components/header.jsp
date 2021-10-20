@@ -77,7 +77,7 @@
           
           <%
               if(session.getAttribute("login") == null || session.getAttribute("login").equals(false)){
-              
+                  
                    out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
                    session.removeAttribute("login");
                    session.removeAttribute("compte");

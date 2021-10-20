@@ -52,6 +52,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletVente</servlet-name>
+        <url-pattern>/ServletVente/listerCategVente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVente</servlet-name>
         <url-pattern>/ServletVente/venteDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
