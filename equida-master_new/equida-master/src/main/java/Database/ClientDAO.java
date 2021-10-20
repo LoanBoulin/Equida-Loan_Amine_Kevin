@@ -73,6 +73,50 @@ public class ClientDAO {
         return lesClients ;    
     } 
     
+     public static Client getUnClient(Connection connection, String codeCli){      
+        Client unClient = new Client();
+        try
+        {
+            //preparation de la requete     
+            //codeCateg="ETE";
+            requete=connection.prepareStatement("SELECT c.*, cv.cat_libelle, p.nom as nomPays, p.code as codePays FROM categvente cv, client c, ach_cat ac, acheteur a, pays p where cv.CAT_CODE = ac.CAT_CODE and ac.CLI_ID = a.CLI_ID and a.CLI_ID = c.CLI_ID and c.CODE = p.CODE AND c.CLI_ID = ? ");
+            requete.setInt(1, Integer.parseInt(codeCli));
+            //executer la requete
+            rs=requete.executeQuery();
+             
+            //On hydrate l'objet métier Client avec les résultats de la requête
+            while ( rs.next() ) {  
+                
+                unClient.setId(rs.getInt("cli_id"));
+                unClient.setNom(rs.getString("cli_nom"));
+                unClient.setPrenom(rs.getString("cli_prenom"));
+                unClient.setTitre(rs.getString("cli_titre"));
+                unClient.setVille(rs.getString("cli_ville"));
+                unClient.setAdrRue(rs.getString("cli_rue"));
+                unClient.setCodePostal(rs.getString("cli_copos"));
+                unClient.setAdresseMessagerie(rs.getString("cli_adresseMessagerie"));
+                
+                
+                Pays p = new Pays();
+                p.setCode(rs.getString("codePays"));
+                p.setNom(rs.getString("nomPays"));
+                
+                unClient.setLePays(p);
+                /*CategVente uneCateg = new CategVente();
+                uneCateg.setCode(rs.getString("code"));  // on aurait aussi pu prendre CodeCateg
+                uneCateg.setLibelle(rs.getString("libelle"));*/
+
+            }
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return unClient ;    
+    } 
+    
+    
      // Méthode permettant d'insérer un client en base à partir de l'objet client passé en paramètre
     // Cette méthode renvoie l'objet client
     public static Client ajouterClient(Connection connection, Client unClient){      

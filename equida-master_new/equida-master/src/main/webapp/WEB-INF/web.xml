@@ -63,6 +63,10 @@
         <url-pattern>/ServletClient/ajouterClient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient/consulterClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletCompte</servlet-name>
         <url-pattern>/ServletCompte/profil</url-pattern>
     </servlet-mapping>

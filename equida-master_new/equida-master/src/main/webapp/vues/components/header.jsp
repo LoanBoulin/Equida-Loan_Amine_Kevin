@@ -76,9 +76,15 @@
           <li><a class="nav-link scrollto" href="../ServletCourse/listerLesCourses">Courses</a></li>
           
           <%
-              if(session.getAttribute("login") != null){
+              if(session.getAttribute("login") == null || session.getAttribute("login").equals(false)){
               
-                    Object laVar = session.getAttribute("login");
+                   out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
+                   session.removeAttribute("login");
+                   session.removeAttribute("compte");
+                   
+              }else{
+
+                Object laVar = session.getAttribute("login");
 
                     if(laVar.equals(true)){
                         Compte leCompte=(Compte)session.getAttribute("compte");
@@ -101,9 +107,8 @@
                       session.removeAttribute("login");
                       session.removeAttribute("compte");
                       out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
+                 
                     }
-              }else{
-                 out.println("<li><a class='nav-link scrollto ' href='../ServletCompte/connexion'>Se Connecter</a></li>");  
               }
           %>
         </ul>

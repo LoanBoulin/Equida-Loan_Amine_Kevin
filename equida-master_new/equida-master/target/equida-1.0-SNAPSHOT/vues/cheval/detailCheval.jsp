@@ -151,7 +151,7 @@
                         out.println(uneEnchere.getId());
                         out.println("</a></td>");
 
-                        out.println("<td><a href ='../ServletClien/profilClient?cliId="+ uneEnchere.getLeClient().getId() + "'>");
+                        out.println("<td><a href ='../ServletClient/consulterClient?codeCli="+ uneEnchere.getLeClient().getId() + "'>");
                         out.println(uneEnchere.getLeClient().getPrenom() + " " + uneEnchere.getLeClient().getNom());
                         out.println("</td>");
 

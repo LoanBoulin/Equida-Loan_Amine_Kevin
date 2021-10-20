@@ -95,6 +95,16 @@ public class ServletClient extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/client/listerLesClientsParCategVente.jsp").forward(request, response);
         }
         
+        else if(url.equals("/equida/ServletClient/consulterClient"))
+        {     
+            String codeCli = (String)request.getParameter("codeCli");
+            
+            Client leClient = ClientDAO.getUnClient(connection, codeCli);
+            request.setAttribute("pUnClient", leClient);
+
+            this.getServletContext().getRequestDispatcher("/vues/client/consulterClient.jsp" ).forward( request, response );
+        }
+        
          if(url.equals("/equida/ServletClient/ajouterClient"))
         {                   
             ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);

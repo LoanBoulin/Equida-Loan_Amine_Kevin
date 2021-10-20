@@ -1,37 +1,77 @@
 <%-- 
-    Document   : consulterClient
-    Created on : 19 août 2021, 15:17:27
-    Author     : Zakina
+    Document   : profil
+    Created on : 13 oct. 2021, 08:45:53
+    Author     : adminsio
 --%>
 
-<%@page import="model.Client"%>
+
+
+<%@include file="../components/header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Equida</title>
-    </head>
-    <body>
-         <h1>Infos clients</h1>
-        
-         <%
-        Client unClient = (Client)request.getAttribute("pClient");
-        %>
-        
-        
-         <table class="table table-bordered table-striped table-condensed">
-            <tr><td>ID :</td><td><% out.println(unClient.getId());%></td></tr>
-            <tr><td>NOM :</td><td><% out.println(unClient.getNom());%></td></tr>
-            <tr><td>PRENOM :</td><td><%  out.println(unClient.getPrenom());%></td></tr>
-          <tr><td> Catégories selectionnées</td><td>
-          <% for (int i=0; i<unClient.getLesCategVente().size(); i++){
-               out.println(unClient.getLesCategVente().get(i).getCode() + "</br>");
-             
-          }
-          %>
-              </td></tr>
-        </table>
-        
-    </body>
-</html>
+<%@page import="model.Client"%>
+<%@page import="model.Compte"%>
+<%@page import="java.util.ArrayList"%>
+
+ <%
+               Client unClient = (Client)request.getAttribute("pUnClient");
+              
+  %>
+  
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <% out.println( " <h2>Profil client de " + unClient.getPrenom() + " " + unClient.getNom() + "</h2>"); %>
+          <p>Toutes les informations concernant le client chez Equida®</p>
+        </div>
+
+          
+            <div class="php-email-form">             
+               <div class="form-group">
+                  <div class="row">
+                      <div class="col">
+                            <h5>Nom & Prenom : </h5>
+                            <% out.println("<p> " + unClient.getNom() + " " + unClient.getPrenom() + "</p>"); %>
+                      </div>
+                      <div class="col">
+                            <h5>Titre : </h5>
+                            <% out.println("<p>" + unClient.getTitre() + "</p>"); %>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">   
+                   <h5>Adresse : </h5>
+                   <% out.println("<p> " + unClient.getAdrRue() + "</p>"); %>
+
+                    <h5>Code postal : </h5>
+                   <% out.println("<p> " + unClient.getCodePostal() + "</p>"); %>
+
+                    <h5>Ville : </h5>
+                   <% out.println("<p> " + unClient.getVille() + "</p>"); %>
+                </div>
+                   <br>
+
+                <div class="form-group">   
+                   <h5>Adresse mail : </h5>
+                   <% out.println("<p> " + unClient.getAdresseMessagerie() + "</p>"); %>
+
+                </div>
+                   <br>
+       
+    
+                      
+              </div>
+
+  
+  </div>     
+  
+    </section><!-- End Team Section -->
+               
+
+
+           
+
+
+<%@include file="../components/footer.jsp" %>
+
+ 
