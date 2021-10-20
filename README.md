@@ -7,10 +7,12 @@ Kevin Malle/
 Loan Boulin/
 
 COMPTE CLIENT : 
-  cdeltour/cheval
+cdeltour/cheval
+
 COMPTE ADMIN : 
-  admin/mpadmin
+admin/mpadmin
+
 COMPTE SALARIE : 
-  joris/mpjojo
+joris/mpjojo
 
 PS : en cas d'erreur majeure empéchant l'accès à toutes les pages. Supprimer les variables de session depuis le navigateur.
