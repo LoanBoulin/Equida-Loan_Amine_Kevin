@@ -14,7 +14,7 @@
   
 
   <%
-     ArrayList<CategVente> lesCategVentes = (ArrayList)request.getAttribute("pLesCategVente");
+     ArrayList<CategVente> lesCategVente = (ArrayList)request.getAttribute("pLesCategVente");
   %>
   
   
@@ -44,9 +44,9 @@
         
                 <tr>
                     <%
-                    for(int i = 0; i < lesCategVentes.size();i++)
-                    {
-                        CategVente uneCategVente = lesCategVentes.get(i);
+                    for(int i = 0; i < lesCategVente.size();i++){
+                        
+                        CategVente uneCategVente = lesCategVente.get(i);
                         out.println("<tr><td>");
                         out.println(uneCategVente.getCode());
                         out.println("</a></td>");
@@ -65,20 +65,33 @@
                         out.println("</td>");
                         
                         out.println("<div class='modal fade' id='exampleModalCenter' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>"
+                                
                                 + "<div class='modal-dialog modal-dialog-centered' role='document'>"
+                                
                                     + "<div class='modal-content'>"
+                                
                                         + "<div class='modal-header'>"
+                                
                                             + "<h5 class='modal-title' id='exampleModalLongTitle'>S'abonner à cette catégorie ?</h5>"
                                            
-                                        + "</div>"
+                                            + "</div>"
+                                
                                         + "<div class='modal-body'>"
+                                
                                             + "<h6>Voulez vous vraiment vous abonner à cette catégorie de vente ?</h6>"
+                                
                                         + "</div>"
-                                    + "<div class='modal-footer'>" 
-                                        + "<input class='btn btn-primary' type='submit' name='valider' id='valider' value='Valider'/>"
-                                        + "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Je ne m'abonne pas</button>"
+                                
+                                    + "<div class='modal-footer'>"
+                                
+                                        + "<input class='btn btn-primary' type='submit' name='valider' id='valider' value='Valider'/>"                              
+
+                                        +"<button type='button' class='btn btn-secondary' data-dismiss='modal'>Je ne m'abonne pas</button>"
+                                
                                         + "</div>"
+                                
                                     + "</div>"
+                                
                                 + "</div>");
                     }
                     

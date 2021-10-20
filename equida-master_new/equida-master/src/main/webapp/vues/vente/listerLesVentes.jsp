@@ -54,8 +54,7 @@
                     if(leCompte.getLeClient() != null){
                         out.println("<div class='col-lg-4 col-md-6 content-item'><div class='divEnchere'><span>");
                         out.println("<a href='../ServletVente/listerCategVente");
-                            out.println();
-                        out.println("'>Voir les différentes catégories de vente</a>");                       
+                        out.println("'>Voir les différentes catégories de ventes</a>");                       
                     }
                 }
 
