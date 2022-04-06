@@ -1,5 +1,7 @@
 # Equida-Loan_Amine_Kevin
 
+![Accueil_EQUIDA](https://github.com/LoanBoulin/Equida-Loan_Amine_Kevin/blob/main/equida-master_new/Autre/Screenshots/Accueil_EQUIDA.png)
+
 ## Description
 
 Equida est une entreprise de vente et achat de chevaux. Le projet Equida désigne une application web destiné à la vente de chevaux et à leur achat. Dans cette application, il est possible de pouvoir voir en détail les informations sur les courses les enchères, les ventes prochaines et les catégories de ventes. On peut aussi voir des informations sur les chevaux prenant part à ces ventes. Vous avez la possibilité de vous connecter, voir votre profil et de vous déconnecter.
@@ -100,4 +102,13 @@ https://github.com/LoanBoulin/Equida-Loan_Amine_Kevin
 - Je peux voir le classement des courses
 - En tant que salarié je peux modifier une vente
 - En tant que salarié je peux supprimer une vente
+
+## Captures d'écran
+
+### Informations Vente EQUIDA
+![Vente_EQUIDA](https://github.com/LoanBoulin/Equida-Loan_Amine_Kevin/blob/main/equida-master_new/Autre/Screenshots/Vente_EQUIDA.png)
+### Liste des chevaux d'une Vente EQUIDA
+![Chevaux_EQUIDA](https://github.com/LoanBoulin/Equida-Loan_Amine_Kevin/blob/main/equida-master_new/Autre/Screenshots/Chevaux_EQUIDA.png)
+### Informations d'un cheval
+![Cheval_EQUIDA](https://github.com/LoanBoulin/Equida-Loan_Amine_Kevin/blob/main/equida-master_new/Autre/Screenshots/Cheval_EQUIDA.png)
 
