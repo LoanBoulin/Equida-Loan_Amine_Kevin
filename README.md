@@ -23,9 +23,9 @@ https://github.com/LoanBoulin/Equida-Loan_Amine_Kevin/blob/main/equida-master_ne
 
 ### Accès
 
-Adresse de l'application [EQUIDA](aaaaaaaaaaaa) (accessible uniquement depuis le réseau local SIO): 
+Adresse de l'application [EQUIDA](http://172.20.177.250:8080/equida_loam/) (accessible uniquement depuis le réseau local SIO): 
 ``` 
-aaaaa/aaaaa/aaaaa
+http://172.20.177.250:8080/equida_loam/
 ```
 
 ### Authentification et autorisation
@@ -56,11 +56,11 @@ Le [diagramme de classes](https://github.com/LoanBoulin/Equida-Loan_Amine_Kevin/
 
 ### Accès
 
-La [base de données MySQL](aaaaaaaaaaaaaaaaaaa) (accessible uniquement depuis le réseau local SIO): 
+La [base de données MySQL](http://172.20.177.250/phpmyadmin/db_structure.php?server=1&db=EQUILOAM) (accessible uniquement depuis le réseau local SIO): 
 ``` 
-aaaaaaaaaaaaaaaaaa
+http://172.20.177.250/phpmyadmin/db_structure.php?server=1&db=EQUILOAM
 
-aaaaaaaaaaaaaaaa / aaaaaaaaaaaaaa
+ADM_EQUILOAM / mpEquiloam
 ```
 
 ### Script
@@ -68,17 +68,6 @@ aaaaaaaaaaaaaaaa / aaaaaaaaaaaaaa
 Le [script SQL](https://github.com/LoanBoulin/Equida-Loan_Amine_Kevin/blob/main/equida-master_new/equida_Loan_BOULIN.sql) de la base de données, directement importable : 
 ``` 
 https://github.com/LoanBoulin/Equida-Loan_Amine_Kevin/blob/main/equida-master_new/equida_Loan_BOULIN.sql
-```
-
-
-## FTP
-
-Le FTP est utilisable avec les identifiants : 
-``` 
-Hôte : aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-Identifiant : aaaaaaaaaaaaaaaaaaaaaa
-Mot de passe : aaaaaaaaaaaaaaaaaaa
-Port : aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 ```
 
 ## GitHub
